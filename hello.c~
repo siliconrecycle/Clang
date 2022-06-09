@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <math.h>
+
+void newline(void);
+void treeline(void);
+
+void threeline(void)
+{
+	newline();
+	newline();
+	newline();
+}
+
+void newline(void)
+{
+	printf("newline\n");
+}
+
+
+int main(void) {
+	printf("hello world!\% \n");
+	threeline();
+	printf("sin(pi/3) = %f\tln(1) = %f\n", sin(3.14/3), log(1));
+	return 4;
+}
