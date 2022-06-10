@@ -5,5 +5,5 @@ int main() {
 	int b[4] = {1, 2};
 
 	/* a = b; */
-	printf("%d\n", a);
+	printf("%s\n", a);
 }

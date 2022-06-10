@@ -19,7 +19,7 @@ double real_part(struct complex_struct z)
 
 double img_part(struct complex_struct z)
 {
-	if (z.t == POLAR) {
+	if (z.t == RECTANGULAR) {
 		return z.b;
 	} else if (z.t == POLAR) {
 		return z.a * sin(z.b);
@@ -60,8 +60,8 @@ struct complex_struct make_from_mag_ang(double r, double A)
 {
 	struct complex_struct z;
 	z.t = POLAR;
-	z.a = r * cos(A);
-	z.b = r * sin(A);
+	z.a = r;
+	z.b = A;
 	return z;
 }
 
@@ -95,20 +95,52 @@ struct complex_struct div_complex(struct complex_struct z1, struct complex_struc
 
 void print_complex(struct complex_struct z)
 {
-	printf("%0.1f", real_part(z));
-	if (img_part(z) < 0) {
-		printf("%0.1fi", img_part(z));
-	} else if (img_part(z) > 0) {
-		printf("+%0.1fi", img_part(z));
+	double a = real_part(z);
+	double b = img_part(z);
+
+	if ((a < -0.011) || (a > 0.099)) {
+		printf("%0.1f", a);
+		if (b > 0.099) {
+			printf("+%0.1fi", b);
+		} else if (b < -0.011) {
+			printf("%0.1fi", b);
+		}
+	} else {
+		if (b > 0.099 || b < -0.011) {
+			printf("%0.1fi", b);
+		}
 	}
+	printf("\n");
 }
 
 int main() {
+	double pi = 3.1415926535897;
+	
 	struct complex_struct a = make_from_real_img(2, 5);
-	struct complex_struct b = make_from_mag_ang(0, 2);
-	struct complex_struct c = make_from_mag_ang(3, -2);
-
+	struct complex_struct b = make_from_mag_ang(1, 2 * pi);
+	// 这个是输入为极坐标的时候，r 为 3, A = 3.14
+	// 3.14 只是趋近于0,但是并不是 0，所以会被认为是大于 0 的数
+	// 精度问题该怎么解决呢？
+	struct complex_struct d = make_from_mag_ang(3, 0);
+	struct complex_struct c = make_from_mag_ang(2, pi / 2);
+	struct complex_struct e = make_from_mag_ang(5, pi / 3);
+        // 这个不应该是（3, 4, 5）构成的三角形么？为什么转换为直角坐标系就会变为（2.5，4.3, x）？
+	// 如果是误差，这个误差也太大了吧。
+	
 	print_complex(a);
 	print_complex(b);
 	print_complex(c);
+	print_complex(d);
+	print_complex(e);
+
+	printf("\n");
+	print_complex(add_complex(a, b));
+	print_complex(sub_complex(a, b));
+	print_complex(div_complex(a, b));
+	print_complex(mul_complex(a, b));
+
+	printf("%f\n", pi / 3);
+	printf("%f\n", sin(pi / 3));
+	printf("%f\n", 5 * sin(pi / 3));
+	printf("%f\n", 5 * cos(pi / 3));
 }
