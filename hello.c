@@ -1,43 +1,67 @@
 #include <stdio.h>
 #include <math.h>
 
+enum coordinate_type { RECTANGULAR, POLAR };
 struct complex_struct {
-	double x, y;
+	enum coordinate_type t;
+	double a, b;
 };
-	
+
 double real_part(struct complex_struct z)
 {
-	return z.x;
+	if (z.t == RECTANGULAR) {
+		return z.a;
+	} else if (z.t == POLAR) {
+		return z.a * cos(z.b);
+	}
+	return -1;
 }
 
 double img_part(struct complex_struct z)
 {
-	return z.y;
+	if (z.t == POLAR) {
+		return z.b;
+	} else if (z.t == POLAR) {
+		return z.a * sin(z.b);
+	}
+	return -1;
 }
 
 double magnitude(struct complex_struct z)
 {
-	return sqrt(z.x * z.x + z.y * z.y);
+	if (z.t == RECTANGULAR) {
+		return sqrt(z.a * z.a + z.b * z.b);
+	} else if (z.t == POLAR) {
+		return z.a;
+	}
+	return -1;
 }
 
 double angle(struct complex_struct z)
 {
-	return atan2(z.y, z.x);
+	if (z.t == RECTANGULAR) {
+		return atan2(z.b, z.a);
+	} else if (z.t == POLAR) {
+		return z.b;
+	}
+	return -1;
 }
 
 struct complex_struct make_from_real_img(double x, double y)
 {
 	struct complex_struct z;
-	z.x = x;
-	z.y = y;
+	z.t = RECTANGULAR;
+	z.a = x;
+	z.b = y;
 	return z;
 }
 
 struct complex_struct make_from_mag_ang(double r, double A)
 {
 	struct complex_struct z;
-	z.x = r * cos(A);
-	z.y = r * sin(A);
+	z.t = POLAR;
+	z.a = r * cos(A);
+	z.b = r * sin(A);
 	return z;
 }
 
@@ -71,12 +95,20 @@ struct complex_struct div_complex(struct complex_struct z1, struct complex_struc
 
 void print_complex(struct complex_struct z)
 {
-	printf("%0.1f + %0.1f i\n", real_part(z), img_part(z));
+	printf("%0.1f", real_part(z));
+	if (img_part(z) < 0) {
+		printf("%0.1fi", img_part(z));
+	} else if (img_part(z) > 0) {
+		printf("+%0.1fi", img_part(z));
+	}
 }
 
 int main() {
 	struct complex_struct a = make_from_real_img(2, 5);
-	/* struct complex_type b = make_from_mag_ang(3, 2); */
+	struct complex_struct b = make_from_mag_ang(0, 2);
+	struct complex_struct c = make_from_mag_ang(3, -2);
 
 	print_complex(a);
+	print_complex(b);
+	print_complex(c);
 }
