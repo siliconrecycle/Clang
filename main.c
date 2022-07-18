@@ -1,37 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <errno.h>
 
-int main(int argc, const char **argv)
+struct record {
+	char name[10];
+	int age;
+};
+
+int main(void)
 {
-	printf("%s\n", "hello");
-	FILE *fp;
-	int ch;
-
-	fp = fopen("Yuan", "w+");
+	struct record array[] = {{"shen", 26}, {"lv", 27}};
+	FILE *fp = fopen("recfile", "w+");
 	if (fp == NULL) {
-		perror("Open file yuan");
+		perror("Open file recfile");
 		exit(1);
 	}
+	fwrite(array, sizeof(struct record), 2, fp);
 
-	while ((ch = getchar()) != EOF) {
-		fputc(ch, fp);
-	}
-
-	long n = ftell(fp);
-	printf("%d\n", n);
-
-	if (fseek(fp, 1, SEEK_SET) != 0) {
-		perror("Seek file Yuan");
-		exit(1);
-	}
-	fputc('K', fp);
-
-
-	rewind(fp);
-	while ((ch = fgetc(fp)) != EOF) {
-		putchar(ch);
-	}
+	fread(array, sizeof(struct record), 2, fp);
+	printf("Name1: %s\tAge1: %d\n", array[0].name, array[0].age);
+	printf("Name2: %s\tAge2: %d\n", array[1].name, array[1].age);
+	
 
 	fclose(fp);
 	return 0;
