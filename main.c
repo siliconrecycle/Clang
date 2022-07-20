@@ -1,10 +1,17 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
 
 int main(void)
 {
-	char month[100];
-	int day, year;
-	char *date = "18 Jul 2022";
-	sscanf(date, "%d %s %d", &day, month, &year);
-	printf("%d/%s/%d\n", day, month, year);
+	struct winsize size;
+	if (isatty(STDOUT_FILENO) == 0)
+		exit(1);
+	if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &size) < 0) {
+		perror("ioctl TIOCGWINSZ error");
+		exit(1);
+	}
+	printf("%d rows, %d columns\n", size.ws_row, size.ws_col);
+	return 0;
 }
