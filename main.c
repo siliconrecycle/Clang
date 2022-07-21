@@ -1,13 +1,37 @@
+#include <unistd.h>
+#include <signal.h>
 #include <stdio.h>
-#include <stdlib.h>
+
+void sig_alrm(int signo)
+{
+	/* nothing to do */
+	printf("hello this alarm is changed by me!!!\n");
+}
+
+unsigned int mysleep(unsigned int nsecs)
+{
+	struct sigaction newact, oldact;
+	unsigned int unslept;
+
+	newact.sa_handler = sig_alrm;
+	sigemptyset(&newact.sa_mask);
+	newact.sa_flags = 0;
+	sigaction(SIGALRM, &newact, &oldact);
+
+	alarm(nsecs);
+	pause();
+
+	unslept = alarm(0);
+	sigaction(SIGALRM, &oldact, NULL);
+
+	return unslept;
+}
 
 int main(void)
 {
-	extern char **environ;
-	int i;
-	for(i = 0; environ[i] != NULL; i++) {
-		printf("%s\n", environ[i]);
+	while(1){
+		mysleep(2);
+		printf("Two seconds passed\n");
 	}
-	printf("PATH=%s\n", getenv("PATH"));
 	return 0;
 }
