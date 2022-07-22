@@ -1,37 +1,40 @@
-#include <unistd.h>
-#include <signal.h>
+#include <stdlib.h>
 #include <stdio.h>
+#include <fcntl.h>
 
-void sig_alrm(int signo)
+void daemonize(void)
 {
-	/* nothing to do */
-	printf("hello this alarm is changed by me!!!\n");
-}
+	pid_t  pid;
 
-unsigned int mysleep(unsigned int nsecs)
-{
-	struct sigaction newact, oldact;
-	unsigned int unslept;
+	/*
+	 * Become a session leader to lose controlling TTY.
+	 */
+	if ((pid = fork()) < 0) {
+		perror("fork");
+		exit(1);
+	} else if (pid != 0) /* parent */
+		exit(0);
+	setsid();
 
-	newact.sa_handler = sig_alrm;
-	sigemptyset(&newact.sa_mask);
-	newact.sa_flags = 0;
-	sigaction(SIGALRM, &newact, &oldact);
+	/*
+	 * Change the current working directory to the root.
+	 */
+	if (chdir("/") < 0) {
+		perror("chdir");
+		exit(1);
+	} 
 
-	alarm(nsecs);
-	pause();
-
-	unslept = alarm(0);
-	sigaction(SIGALRM, &oldact, NULL);
-
-	return unslept;
+	/*
+	 * Attach file descriptors 0, 1, and 2 to /dev/null.
+	 */
+	close(0);
+	open("/dev/null", O_RDWR);
+	dup2(0, 1);
+	dup2(0, 2);
 }
 
 int main(void)
 {
-	while(1){
-		mysleep(2);
-		printf("Two seconds passed\n");
-	}
-	return 0;
+	daemonize();
+	while(1);
 }
