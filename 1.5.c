@@ -1,15 +1,22 @@
 #include <stdio.h>
 
-/* This time, we will counte the number of lines. */
+/* ex.1-8 count blanks, tabs, newlines. */
 
 int main() {
-	int nl;
+	int nl, nb, nt;
 	int c;
 
-	nl = 0;
+	nl = nb = nt = 0;
 	while ((c = getchar()) != EOF) {
-		if (c == '\n')
+		if (c == '\n') {
 			++nl;
+		} else if (c == ' ') {
+			++nb;
+		} else if (c == '\t') {
+			++nt;
+		}
 	}
-	printf("The number of input lines: %d\n", nl);
+	printf("The number of newlines: %d\n", nl);
+	printf("The number of tabs: %d\n", nt);
+	printf("The number of blanks: %d\n", nb);
 }
