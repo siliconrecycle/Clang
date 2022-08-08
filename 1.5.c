@@ -1,18 +1,17 @@
 #include <stdio.h>
 
+/* In this time, we will write a program which can count the
+   number of characters.
+   This is 1.5.2, i will write this program in two ways.*/
 int main() {
-	int c;
+	long nc;
 
-	/* putchar(33); */
-	/* printf("true or false: %d\n", c = getchar() != EOF); */
-	/* (c = getchar != EOF) => 1(true)
-	This is very important, 1 in ascii code is a no-display symbol.
-	That means, even if it is in infinit loop, it will display nothing
-	in terminal.
-	Of course, we also need to know in function `putchar()`, his argument
-	is integer, and then be transfered to character by ascii code table.*/
-	while ((c = getchar()) != EOF) { 
-		putchar(c);
-	}
+	/* nc = 0; */
+	/* while (getchar() != EOF) { */
+	/* 	++nc; */
+	/* } */
 
+	for (nc = 0; getchar() != EOF; ++nc)
+		;
+	printf("The number of input character: %ld\n", nc);
 }
