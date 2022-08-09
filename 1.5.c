@@ -1,14 +1,23 @@
 #include <stdio.h>
 
-/* ex.1-9 copy input to output, and replacing one or more blanks by a single
- blank.*/
+/* ex.1-10 replace the tab with '\t', backspace with '\b', backslash with
+ '\\'.*/
 
 int main() {
 	int c;
 
 	while ((c = getchar()) != EOF) {
-		putchar(c);
-		while (c == ' ')
-			c = getchar();
+		if (c == '\t') {
+			putchar('\\');
+			putchar('t');
+		} else if (c == '\b') {
+			putchar('\\');
+			putchar('b');
+		} else if (c == '\\') {
+			putchar('\\');
+			putchar('\\');
+		} else {
+			putchar(c);
+		}
 	}
 }
