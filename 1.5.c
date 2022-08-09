@@ -1,27 +1,23 @@
 #include <stdio.h>
 
-/* ex.1-11 anything is not in `(c == ' ' || c == '\t' || c == '\n')`
- for example, `\b` is one thing which will cause bug.*/
-
 #define IN  1
 #define OUT 0
 
+/* ex.1-12 write a program which prints it input one world per line */
+
 int main() {
 	int c, state;
-	int nc, nl, nw;
-	
-	nc = nl = nw = 0;
+
 	state = OUT;
 	while ((c = getchar()) != EOF) {
-		++nc;
-		if (c == '\n')
-			++nl;
-		if (c == ' ' || c == '\t' || c == '\n') {
+		if (c == ' ' || c == '\n' || c == '\t') {
 			state = OUT;
+			putchar('\n');
 		} else if (state == OUT) {
 			state = IN;
-			++nw;
+			putchar(c);
+		} else if (state == IN) {
+			putchar(c);
 		}
 	}
-	printf("chars: %d, lines: %d, words: %d\n", nc, nl, nw);
 }
