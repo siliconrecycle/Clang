@@ -1,6 +1,7 @@
 #include <stdio.h>
 
-/* 1.5.4 This example will count the number of lines, characters, words */
+/* ex.1-11 anything is not in `(c == ' ' || c == '\t' || c == '\n')`
+ for example, `\b` is one thing which will cause bug.*/
 
 #define IN  1
 #define OUT 0
