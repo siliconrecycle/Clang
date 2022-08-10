@@ -1,28 +1,54 @@
 #include <stdio.h>
 
-/* This is a program which can count digital, white sapce, and others. */
+/* ex.1-13 write a program to print a histogram of the length of words in
+ its input.First, we need a program to count the length of word.*/
+
+#define OUT 0
+#define IN  1
 
 int main() {
-	int c;
-	int ndigit[10];
-	int nw, no;
+	int c, state, n;
+	int nw[10];
 
-	nw = no = 0;
+	state = OUT;
+	n = 0;
 	for (int i = 0; i < 10; ++i)
-		ndigit[i] = 0;
-
-	while ((c = getchar()) != EOF) {
-		if (c > '0' && c < '9') {
-			++ndigit[c - '0'];
-		} else if (c == ' ' || c == '\t' || c == '\n') {
-			++nw;
-		} else {
-			++no;
+		nw[i] = 0;
+	
+	while ((c = getchar()) != EOF && n < 10) {
+		if (c == ' ' || c == '\t' || c == '\n') {
+			state = OUT;
+			++n;
+		} else if (state == OUT || state == IN) {
+			state = IN;
+			++nw[n];
 		}
 	}
-
-	printf("digital = ");
 	for (int i = 0; i < 10; ++i)
-		printf("%d ", ndigit[i]);
-	printf("\nwhite space = %d\nother = %d\n", nw, no);
+		printf("%d ", nw[i]);
+	printf("\n");
+
+	/* horizontal histogram */
+	for (int i = 0; i < 10; ++i) {
+		printf("%d ", i);
+		for (int j = 0; j < nw[i]; ++j)
+			printf("*");
+		printf("\n");
+	}
+	printf("\n");
+	
+	/* vertical histogram */
+	for (int i = 9; i >= 0; --i) {
+		for (int j = 0; j < 10; ++j) {
+			if (nw[j] - i > 0) {
+				printf("*\t");
+			} else {
+				printf("\t");
+			}
+		}
+		printf("\n");
+	}
+	for (int i = 0; i < 10; ++i)
+		printf("%d\t", i);
+	printf("\n");
 }
