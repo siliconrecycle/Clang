@@ -1,54 +1,38 @@
 #include <stdio.h>
 
-/* ex.1-13 write a program to print a histogram of the length of words in
- its input.First, we need a program to count the length of word.*/
+/* ex.1-14 Write a program to print a histogram of the frequence of different characters in its input. */
 
-#define OUT 0
-#define IN  1
+#define MAXLINES 10
+#define NUM      26
 
 int main() {
-	int c, state, n;
-	int nw[10];
+	int c;
+	int nc[NUM];
 
-	state = OUT;
-	n = 0;
-	for (int i = 0; i < 10; ++i)
-		nw[i] = 0;
-	
-	while ((c = getchar()) != EOF && n < 10) {
-		if (c == ' ' || c == '\t' || c == '\n') {
-			state = OUT;
-			++n;
-		} else if (state == OUT || state == IN) {
-			state = IN;
-			++nw[n];
+	for (int i = 0; i < NUM; ++i)
+		nc[i] = 0;
+
+	while((c = getchar()) != EOF) {
+		if (c > 'a' && c < 'z') {
+			++nc[c - 'a'];
 		}
 	}
-	for (int i = 0; i < 10; ++i)
-		printf("%d ", nw[i]);
-	printf("\n");
 
-	/* horizontal histogram */
-	for (int i = 0; i < 10; ++i) {
-		printf("%d ", i);
-		for (int j = 0; j < nw[i]; ++j)
-			printf("*");
-		printf("\n");
-	}
-	printf("\n");
-	
-	/* vertical histogram */
-	for (int i = 9; i >= 0; --i) {
-		for (int j = 0; j < 10; ++j) {
-			if (nw[j] - i > 0) {
-				printf("*\t");
+	for (int i = 0; i < NUM; ++i)
+		printf("%d ", nc[i]);
+
+	for (int i = MAXLINES - 1; i >= 0; --i) {
+		for (int j = 0; j < NUM; ++j) {
+			if (nc[j] - i > 0) {
+				printf("* ");
 			} else {
-				printf("\t");
+				printf("  ");
 			}
 		}
 		printf("\n");
 	}
-	for (int i = 0; i < 10; ++i)
-		printf("%d\t", i);
+
+	for (int i = 0; i < NUM ; ++i)
+		printf("%c ", 'a' + i);
 	printf("\n");
 }
