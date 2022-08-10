@@ -1,17 +1,12 @@
 #include <stdio.h>
 
-void printptr(void *p) {
-	printf("p = %p; *p = %016lx\n", p, *(long *)p);
-}
+int main() {
+	int inttype;
+	char chartype;
 
-int x;
+	printf("int: %d byte\n", sizeof(inttype));
+	printf("char: %d byte\n", sizeof(chartype));
+	printf("EOF: %d\n", EOF);
 
-int main(int argc, char *argv[]) {
-	printptr(main);
-	printptr(&main);
-	printptr(&x);
-	printptr(&argc);
-	printptr(argv);
-	printptr(&argv);
-	printptr(argv[0]);
 }
+	
