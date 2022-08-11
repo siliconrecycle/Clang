@@ -1,22 +1,20 @@
 #include <stdio.h>
 
-/* 1.7 This is a program tell you how to write a function in one file. */
+/* ex.1-15 use function syntax to rewrite template conversion program. */
 
-int power(int base, int n);
+#define UPPER 300
+#define LOW   0
+#define STEP  20
+
+float FahrToCel(float fahr);
 
 int main () {
-	for (int i = 0; i < 10; ++i) {
-		printf("2(%d) = %d\n", i, power(2, i));
-		printf("-3(%d) = %d\n", i, power(-3, i));
+	for (float i = LOW; i <= UPPER; i += STEP) {
+		printf("%3.0f %6.1f\n", i, FahrToCel(i));
 	}
 	return 0;
 }
 
-int power(int base, int n) {
-	int p;
-	p = 1;
-	for (int i = 1; i <= n; ++i) {
-		p = base * p;
-	}
-	return p;
+float FahrToCel(float fahr) {
+	return (5.0/9.0) * (fahr - 32.0);
 }
