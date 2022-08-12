@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 
 /* This is a program that reads a set of text lines and prints the longest.
@@ -12,26 +13,39 @@
 
    how can i do this (stored line = this line),and how
    can i realize (this line is longer than stored line)?
+
+   ex.1-16 revise the main routine of the program, so it can print the
+   length of the arbitrary input lines, and as much as possible text.
 */
 
-#define MAX 100
+#define MAX 10
 
 int getline01(char s[], int lim);
 void copy01(char dest[], char src[]);
 
 int main() {
-	int len, slen;
+	int len, slen, longest;
 	char line[MAX];
 	char stored[MAX];
 	
-	slen = 0;
+	slen = longest = 0;
 	while ((len = getline01(line, MAX)) > 0) {
-		if (len > slen) {
+		if (len == MAX - 1 && line[MAX - 1] == '\0') {
+			slen = slen + len; 
+		} else if (slen > 0) {
+			slen = len + slen;
+			if (slen > longest) {
+				longest = slen;
+				copy01(stored, line);
+			}
+			slen = 0;
+		} else if (len > longest) {
 			copy01(stored, line);
-			slen = len;
-		}
+			longest = len;
+		} 
 	}
-	printf("%s\n", stored);
+	if (longest > 0)
+		printf("\n%slongest: %d\n", stored, longest);
 }
 
 int getline01(char s[], int lim) {
@@ -43,7 +57,7 @@ int getline01(char s[], int lim) {
 		s[i] = '\n';
 		++i;
 	}
-	s[i] = '\0';
+	s[i] = '\0';	
 	return i;
 }
 
