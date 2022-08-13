@@ -1,7 +1,10 @@
 #include <stdio.h>
 
 /*
-  1.10 use external variable to revise the longest-line program.
+  ex.1-20 write a program deltab replaces the tab with the proper
+  number of space.
+  Outline:
+          while (has 
 */
 
 #define MAX 100
