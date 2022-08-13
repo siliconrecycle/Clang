@@ -14,11 +14,24 @@
    how can i do this (stored line = this line),and how
    can i realize (this line is longer than stored line)?
 
-   ex.1-16 revise the main routine of the program, so it can print the
-   length of the arbitrary input lines, and as much as possible text.
+   ex.1-17 write a program to print all lines that are longer than 80 characters.
+
+   while (has text line) {
+           if (length of line > 80) {
+	           (copy it)
+		   (save it)
+	   }
+   }
+   (print it)
+
+   There is still some question, how can i save the unknown length of the lines?
+   I don't know the size of array that i need to declare, because i don't know
+   how many lines which its length longer than LIM.
+   but i can simplely print it.
 */
 
-#define MAX 10
+#define MAX 100
+#define LIM 8
 
 int getline01(char s[], int lim);
 void copy01(char dest[], char src[]);
@@ -34,18 +47,15 @@ int main() {
 			slen = slen + len; 
 		} else if (slen > 0) {
 			slen = len + slen;
-			if (slen > longest) {
-				longest = slen;
-				copy01(stored, line);
+			if (slen > LIM) {
+				printf("%s", line);
 			}
 			slen = 0;
-		} else if (len > longest) {
-			copy01(stored, line);
+		} else if (len > LIM) {
+			printf("%s", line);
 			longest = len;
 		} 
 	}
-	if (longest > 0)
-		printf("\n%slongest: %d\n", stored, longest);
 }
 
 int getline01(char s[], int lim) {
