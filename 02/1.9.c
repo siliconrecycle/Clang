@@ -16,7 +16,7 @@
 
 int getline01(char s[], int lim);
 void copy01(char dest[], char src[]);
-void reverse(char line[], int len);
+void reverse(char s[], char l[], int len);
 
 int main() {
 	int len, slen, longest;
@@ -25,16 +25,15 @@ int main() {
 	
 	slen = longest = 0;
 	while ((len = getline01(line, MAX)) > 0) {
-		reverse(line, len);
+		reverse(stored, line, len);
+		printf("%s\n", stored);
 	}
 }
 
-void reverse(char line[], int len) {
-	char r[MAX];
+void reverse(char stored[], char line[], int len) {
 	for (int i = 0; i < len; ++i) {
-		r[i] = line[len - i - 2];
+		stored[i] = line[len - i - 2];
 	}
-	printf("%s", r);
 }
 
 int getline01(char s[], int lim) {
