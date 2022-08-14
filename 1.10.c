@@ -1,48 +1,56 @@
 #include <stdio.h>
 
 /*
-  ex.1-21 write a program entab replaces the spacing with the minimal
-  number of space and tab.
+  ex.1-22 write a program to flod the long long input line into two or more short lines.
   Outline:
-          while (has character) {
-	          if(is space) {
-		          (count space)
-			  (replace the space with n tab and m space)
-		  }
-		  (print char)
+          while (has a line) {
+	          if (stored line is empty)
+	                  (store line)
+		  else
+		          if (the stored line the last is no-blank character
+			      and current line is not a blank)
+	                          (print stored line with slash)
+				  (store line)
+		          else (
 	  }
 
-  Note: This program should think about the number of space bigger than TAB and
-  smaller than TAB, this will have different result.
+	  print line(line, limit)
+	          
+  note: although this program is not intelligence to know the words and just simply sperate the words
+  into next line, but it can work for this question.
+  it still have some place can be inproved, maybe in futuress.
 */
-#define TAB 8
+
+#define MAX 10
+
+int getline01(char line[], int lim);
 
 int main() {
-	int i, c, s;
-	int n, m;
+	int len;
+	char line[MAX];
+	
+	for (int i = 0; i < MAX; ++i)
+		line[i] = 0;
 
-	i = 0;
-	while ((c = getchar()) != EOF) {
-		++i;
-		if (c == ' ') {
-			--i;
-			for (s = 1; (c = getchar()) == ' '; ++s);
-
-			n = (i + s) / TAB;
-			if (n > 0)
-				m = (i + s) % TAB;
-			else
-				m = (i + s) % TAB - i;
-			
-			for (int j = 0; j < n; ++j)
-				putchar('\t');
-			for (int k = 0; k < m; ++k)
-				putchar('*');
-			i = 1;
-		} else if (c == '\n') {
-			putchar(c);
-			i = 0;
-		}
-		putchar(c);
+	while ((len = getline01(line, MAX)) > 0) {
+		if (len > MAX - 2 && line[MAX - 2] != ' ') 
+			printf("%s/\n", line);
+		else
+			printf("%s", line);
 	}
+}
+
+int getline01(char line[], int lim)
+{
+	int c, i;
+	
+	for (i = 0; i < lim - 1 && (c = getchar()) != EOF && c != '\n'; ++i) {
+		line[i] = c;
+	}
+	if (c == '\n') {
+		line[i] = c;
+		++i;
+	}
+	line[i] = '\0';
+	return i;
 }
