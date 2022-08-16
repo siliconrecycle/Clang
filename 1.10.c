@@ -3,19 +3,18 @@
 /*
   ex.1-22 write a program to flod the long long input line into two or more short lines.
   Outline:
-          while (has a line) {
-	          if (stored line is empty)
-	                  (store line)
-		  else
-		          if (the stored line the last is no-blank character
-			      and current line is not a blank)
-	                          (print stored line with slash)
-				  (store line)
-		          else (
+          while (has a character) {
+	          (count n)
+	          if (n < len) {
+		          (print it)
+		  } else if (n = len && c != ' ') {
+		          (print '/')
+			  (print '\n')
+			  (print it)
+			  (n = 0)
+		  } 
 	  }
-
-	  print line(line, limit)
-	          
+	  	          
   note: although this program is not intelligence to know the words and just simply sperate the words
   into next line, but it can work for this question.
   it still have some place can be inproved, maybe in futuress.
