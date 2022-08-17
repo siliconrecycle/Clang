@@ -7,12 +7,15 @@
 	          (count n)
 	          if (n < len) {
 		          (print it)
-		  } else if (n = len && c != ' ') {
+		  } else if (n == len && c != ' ') {
 		          (print '/')
 			  (print '\n')
 			  (print it)
 			  (n = 0)
-		  } 
+		  } else if (n == len) {
+		          (print it)
+			  (n = 0)
+		  }
 	  }
 	  	          
   note: although this program is not intelligence to know the words and just simply sperate the words
@@ -22,34 +25,20 @@
 
 #define MAX 10
 
-int getline01(char line[], int lim);
-
 int main() {
-	int len;
-	char line[MAX];
-	
-	for (int i = 0; i < MAX; ++i)
-		line[i] = 0;
+	int c;
 
-	while ((len = getline01(line, MAX)) > 0) {
-		if (len > MAX - 2 && line[MAX - 2] != ' ') 
-			printf("%s/\n", line);
-		else
-			printf("%s", line);
+	for (int i = 0; (c = getchar()) != EOF; ++i) {
+		if (i == MAX && c != ' ') {
+			putchar('/');
+			putchar('\n');
+			putchar(c);
+			i = 0;
+		} else if (i == MAX) {
+			putchar('\n');
+			putchar(c);
+			i = 0;
+		} else
+			putchar(c);
 	}
-}
-
-int getline01(char line[], int lim)
-{
-	int c, i;
-	
-	for (i = 0; i < lim - 1 && (c = getchar()) != EOF && c != '\n'; ++i) {
-		line[i] = c;
-	}
-	if (c == '\n') {
-		line[i] = c;
-		++i;
-	}
-	line[i] = '\0';
-	return i;
 }
