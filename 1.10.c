@@ -1,44 +1,17 @@
 #include <stdio.h>
 
 /*
-  ex.1-22 write a program to flod the long long input line into two or more short lines.
+  ex.1-23 write a program to remove comment from the C program.
   Outline:
           while (has a character) {
-	          (count n)
-	          if (n < len) {
-		          (print it)
-		  } else if (n == len && c != ' ') {
-		          (print '/')
-			  (print '\n')
-			  (print it)
-			  (n = 0)
-		  } else if (n == len) {
-		          (print it)
-			  (n = 0)
-		  }
+	          if (the first two characters are '/' and '*') {
+		          (skip middle character with loop
+			   until the last two character are '*'
+			   and '/')
+			   while (the first character is not '*', the
+			   last character is not '/');
+			   (print char)
+		   }
 	  }
-	  	          
-  note: although this program is not intelligence to know the words and just simply sperate the words
-  into next line, but it can work for this question.
-  it still have some place can be inproved, maybe in futuress.
+  note: this program in some aspect is simily to remove some blank into one blank.
 */
-
-#define MAX 10
-
-int main() {
-	int c;
-
-	for (int i = 0; (c = getchar()) != EOF; ++i) {
-		if (i == MAX && c != ' ') {
-			putchar('/');
-			putchar('\n');
-			putchar(c);
-			i = 0;
-		} else if (i == MAX) {
-			putchar('\n');
-			putchar(c);
-			i = 0;
-		} else
-			putchar(c);
-	}
-}
