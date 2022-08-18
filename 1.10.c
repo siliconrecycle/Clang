@@ -15,3 +15,19 @@
 	  }
   note: this program in some aspect is simily to remove some blank into one blank.
 */
+
+int main(void) {
+	int c1, c2;
+
+	while ((c1 = getchar()) != EOF) {
+		if (c1 == '/' && (c2 = getchar()) == '*') {
+			while ( !((c1 = getchar()) == '*'
+				  && (c2 = getchar()) == '/')) {
+				;
+			}
+			c1 = getchar();
+		} else {
+			putchar(c1);
+		}
+	}
+}
