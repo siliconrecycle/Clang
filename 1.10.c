@@ -5,23 +5,32 @@
   syntax errors of the unmatched parentheses, brackets and braces.
   
   Outline:
-          while (has a character) {
-	          (matched or not)
+          while ((c = getchar()) != EOF) {
+	          if (c == '{') {
+		          while ((c = getchar() != '}'));
+		  }
+	  }
+
+	  match ('{', '}') {
+	          if (c == EOF) {
+		         (return error)
+		  } else if (c == '{') {
+		         c = getchar()
+			 (matched '{' and '}')
+		  } else if (c == '}') {
+		         (return success)
+		  } else {
+		         c = getchar()
+		  }
 	  }
 */
 
 int main(void) {
-	int c1, c2;
+	int c;
 
 	while ((c1 = getchar()) != EOF) {
-		if (c1 == '/' && (c2 = getchar()) == '*') {
-			while ( !((c1 = getchar()) == '*'
-				  && (c2 = getchar()) == '/')) {
-				;
-			}
-			c1 = getchar();
-		} else {
-			putchar(c1);
+		if (c == '{') {
+			
 		}
 	}
 }
