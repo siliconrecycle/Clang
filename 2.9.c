@@ -1,38 +1,34 @@
 #include <stdio.h>
-#include <ctype.h>
-
-/* #define SET_ON 011 */
 
 unsigned getbits(unsigned x, int p, int n);
+unsigned setbits(unsigned x, int p, int n, int y);
 
 int main(void) {
-	int a = -20;
-
-	printf("%#b\n", a);
-	/* printf("%#d\n", a); */
-	printf("%#b\n", ~a);
-	/* printf("%#b\n", !a); */
-
-	printf("%#b\n", a & ~0177);
-	/* printf("%b\n", a | SET_ON); */
-	/* printf("%b\n", 0b1 & 0b10); */
-	/* printf("%b\n", 0b1 && 0b10); */
-
-	/* printf("%#b\n", a >> 2); */
-	/* printf("%#d\n", a >> 2); */
-
-	/* printf("%#b\n", a << 2); */
-	/* printf("%#d\n", a << 2); */
-
-	/* int a = 0b010010011; */
+	int a = 0b010010011;
 	/* printf("%#b\n", a); */
+	/* unsigned int r2 = getbits(a, 3, 3); */
+	/* printf("%#b\n", r2); */
 	/* unsigned int r = getbits(a, 4, 3); */
 	/* printf("%#b\n", r); */
 	/* unsigned int r1 = getbits(a, 5, 3); */
 	/* printf("%#b\n", r1); */
-	/* unsigned int r2 = getbits(a, 3, 3); */
-	/* printf("%#b\n", r2); */
+	setbits(a, 5, 3, 1);
+}
 
+unsigned setbits(unsigned x, int p, int n, int y)
+{
+	/*
+	 setbits(a, 5, 3, 1)
+	 11111111 >> (5 + 1 -3) =>
+	 11111 << 3 =>
+	 11111000
+	 ~000 << 3
+	 01001010 | 00111000
+	 01111010
+	*/
+
+	int r = (~000 << 3);
+	printf("%#b\n", r);
 }
 
 unsigned getbits (unsigned x, int p, int n)
