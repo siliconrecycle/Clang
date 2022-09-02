@@ -3,6 +3,7 @@
 unsigned getbits(unsigned x, int p, int n);
 unsigned setbits(unsigned x, int p, int n, int y);
 unsigned invert(unsigned x, int p, int n);
+unsigned rightrot(unsigned x, int n);
 
 int main(void) {
 	int a = 0b01001011;
@@ -21,6 +22,20 @@ int main(void) {
 	int c = invert(a, 5, 3);
 	printf("%#b\n", c);
 }
+
+/*
+  a = 01001011
+  rightrot(a, 3) =>
+  01001110
+
+  
+ */
+
+unsigned rightrot(unsigned x, int n)
+{
+
+}
+
 
 /*
   a = 01001011
