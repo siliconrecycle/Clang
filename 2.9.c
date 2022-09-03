@@ -19,7 +19,9 @@ int main(void) {
 	/* printf("%#b\n", r1); */
 	/* int c = setbits(a, 5, 3, 0b00101000); */
 	/* printf("%#b\n", c); */
-	int c = invert(a, 5, 3);
+	/* int c = invert(a, 5, 3); */
+	/* printf("%#b\n", c); */
+	int c = rightrot(a, 3);
 	printf("%#b\n", c);
 }
 
@@ -28,12 +30,37 @@ int main(void) {
   rightrot(a, 3) =>
   01001110
 
+  a1 = a =>
+  01001011
+  a = (a >> 3) << 3 =>
+  01001000
   
+  a1 & 0b1 = 01001011 & 00000001 =>
+  00000001 << 3 - 1 =>
+  00000100 | a =>
+  01001100
+  
+  (a1 >> 1) & 0b1 = 0100101 & 00000001 =>
+  00000001 << 2 - 1 =>
+  00000010 | a =>
+  01001110
+
+  (a1 >> 1) & 0b1 = 010010 & 00000001 =>
+  00000000 << 1 - 1 =>
+  00000000 | a =>
+  01001110
  */
 
 unsigned rightrot(unsigned x, int n)
 {
+	unsigned a, a1;
+	a = a1 = x;
+	a = (a >> n) << n;
 
+	for (int i = 0; i < n; ++i) {
+		a |= ((a1 >> i) & 0b1) << (n - i - 1);
+	}
+	return a;
 }
 
 
