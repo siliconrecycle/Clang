@@ -3,11 +3,18 @@
 int bitcount(unsigned i);
 
 int main(void) {
-	printf("%#b\n", 10);
-	int c = bitcount(10);
-	printf("%d\n", c);
-	return 0;
+	int a, b, c;
+	a = 10, b = 20, c = 30;
+
+	a *= b + c; // 500
+	a += b * c; // 610
+	printf("%d\n", a);
 	
+	/* printf("%#b\n", 10); */
+	/* int c = bitcount(10); */
+	/* printf("%d\n", c); */
+	/* return 0; */
+
 	/* char msg[] = "abcdefg"; */
 	/* int a, b; */
 	/* a = 1; */
