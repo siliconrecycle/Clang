@@ -10,11 +10,14 @@ int main(void) {
 
 	++n;
 	printf("%d %d\n", n, power(2, n));
+	/* printf("%d %d\n", ++n, power(2, n)); */
 }
 
-int power(int n, int x )
+int power(int n, int x)
 {
-	for (int i = 0; i < x; ++i)
-		n *=n;
-	return n;
+	int p = 1;
+
+	for (int i = 1; i <= x; ++i)
+		p *= n;
+	return p;
 }
