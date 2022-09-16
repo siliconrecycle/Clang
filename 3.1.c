@@ -11,35 +11,7 @@ int main(void) {
 	}
 }
 
-/*
-  {1, 3, 9, 12, 35, 60}
-   0  1  2  3   4   5
-   (9, 6)
-
-   low = 0, high = 5
-   (0 < 5)
-   mid = (low + high) / 2 = 2
-   (9 = 9) =>
-   high = 2 - 1 = 1
-
-   low = 0, high = 1
-   (low < high)
-   mid = 0
-   (9 > 1) =>
-   low = 0 + 1 = 1
-
-   low = 1, high = 1
-   (low <= high)
-   mid = 1
-   (9 > 3) =>
-   low = 1 + 1 = 2
-   
-   low = 2, high = 1
-   (low > high)
-
-   low = 2
- */
-
+// 1.
 int binsearch(int x, int v[], int n)
 {
 	int low, high, mid;
@@ -49,19 +21,68 @@ int binsearch(int x, int v[], int n)
 
 	while (low <= high) {
 		mid = (low + high) / 2;
-		if (x <= v[mid]) {
+		if (x < v[mid]) {
 			high = mid - 1;
-		} else {
+		} else if (x > v[mid]) {
 			low = mid + 1;
-		}
+		} else
+			return mid;
 	}
-	
-	if (v[low] != x)
-		return -1;
-	return low;
+	return -1;
 }
 
+// 2.
+/* /\* */
+/*   {1, 3, 9, 12, 35, 60} */
+/*    0  1  2  3   4   5 */
+/*    (9, 6) */
 
+/*    low = 0, high = 5 */
+/*    (0 < 5) */
+/*    mid = (low + high) / 2 = 2 */
+/*    (9 = 9) => */
+/*    high = 2 - 1 = 1 */
+
+/*    low = 0, high = 1 */
+/*    (low < high) */
+/*    mid = 0 */
+/*    (9 > 1) => */
+/*    low = 0 + 1 = 1 */
+
+/*    low = 1, high = 1 */
+/*    (low <= high) */
+/*    mid = 1 */
+/*    (9 > 3) => */
+/*    low = 1 + 1 = 2 */
+   
+/*    low = 2, high = 1 */
+/*    (low > high) */
+
+/*    low = 2 */
+/*  *\/ */
+
+/* int binsearch(int x, int v[], int n) */
+/* { */
+/* 	int low, high, mid; */
+
+/* 	low = 0; */
+/* 	high = n - 1; */
+
+/* 	while (low <= high) { */
+/* 		mid = (low + high) / 2; */
+/* 		if (x <= v[mid]) { */
+/* 			high = mid - 1; */
+/* 		} else { */
+/* 			low = mid + 1; */
+/* 		} */
+/* 	} */
+	
+/* 	if (v[low] != x) */
+/* 		return -1; */
+/* 	return low; */
+/* } */
+
+// 3.
 /* /\* */
 /*   {1, 3, 9, 12, 35, 60} */
 /*    0  1  2  3   4   5 */
