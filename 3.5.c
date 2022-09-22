@@ -2,14 +2,31 @@
 
 void shellsort(int v[], int n, int m);
 void printfV(int v[], int n);
+void expand(char s1[], char s2[]);
 
 int main(void) {
-	int v[] = {7, 5, 3, 2, 3, 8, 7, 1, 2, 9};
-	printfV(v, 10);
-	shellsort(v, 10, 0);
-	printfV(v, 10);
-	shellsort(v, 10, 1);
-	printfV(v, 10);
+	/* int v[] = {7, 5, 3, 2, 3, 8, 7, 1, 2, 9}; */
+	/* printfV(v, 10); */
+	/* shellsort(v, 10, 0); */
+	/* printfV(v, 10); */
+	/* shellsort(v, 10, 1); */
+	/* printfV(v, 10); */
+
+	char s1[] = "a-z";
+	printf("%s\n", s1);
+	char s2[100];
+	expand(s1, s2);
+	printf("%s\n", s2);
+}
+
+void expand(char s1[], char s2[])
+{
+	int i, j;
+	for(i = 0, j = 0; isalpha(s1[i]); ++i) {
+		if (s1[++i] = '-') {
+			
+			s2[j] = s1[--i];
+		
 }
 
 void printfV(int v[], int n)
