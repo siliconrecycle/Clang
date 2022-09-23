@@ -1,7 +1,9 @@
 #include <stdio.h>
+#include <string.h>
 
 void shellsort(int v[], int n, int m);
 void printfV(int v[], int n);
+void printfS(char v[]);
 void expand(char s1[], char s2[]);
 
 int main(void) {
@@ -13,20 +15,44 @@ int main(void) {
 	/* printfV(v, 10); */
 
 	char s1[] = "a-z";
-	printf("%s\n", s1);
-	char s2[100];
-	expand(s1, s2);
-	printf("%s\n", s2);
+	char a[] = "-a-z";
+	char b[] = "a-z-";
+	char c[] = "-a-z\n"
+		"1-\t7"
+		"\nB-G-";
+	/* printf("%s\n", b); */
+	/* char s2[100]; */
+	/* expand(c, s2); */
+	/* printf("%s\n", s2); */
+	printfS(c);
+}
+
+void printfS(char v[])
+{
+	int n = strlen(v);
+	for (int i = 0; i < n; ++i)
+		printf("%c", v[i]);
+	printf("\n");
 }
 
 void expand(char s1[], char s2[])
 {
 	int i, j;
-	for(i = 0, j = 0; isalpha(s1[i]); ++i) {
-		if (s1[++i] = '-') {
-			
-			s2[j] = s1[--i];
-		
+
+	printf("%s\n", s1);
+	for(i = 0, j = 0; s1[i] != '\0'; ++i, ++j) {
+		/*while countes '-', i not equal 0 and the last is not terminate operater. */
+		if (s1[i] == '-' && i != 0 && s1[i + 1] != '\0') {
+			--j;
+			++i;
+			while (s2[j] != s1[i]) {
+				++j;
+				s2[j] = s2[j-1] + 1;
+			}
+		}
+		s2[j] = s1[i];
+	}
+	s2[j] = '\0';
 }
 
 void printfV(int v[], int n)
