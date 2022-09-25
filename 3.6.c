@@ -4,6 +4,7 @@
 
 void itoa(int n, char s[]);
 void itob(int n, char s[], int b);
+void itoc(int in, char s[], int w);
 void printfS(char v[]);
 void reverse(char s[]);
 
@@ -17,8 +18,32 @@ int main(void)
 
 	/* itoa(i, s); */
 	/* reverse(s); */
-	itob(i, s, 16);
+	/* itob(i, s, 16); */
+	itoc(i, s, 5);
 	printfS(s);
+}
+
+void itoc(int in, char s[], int w)
+{
+	int i, sign;
+	long int n;
+
+	n = in;
+	if ((sign = n) < 0) {
+		n = -n;
+	}
+
+	i = 0;
+	do {
+		s[i++] = n % 10 + '0';
+		for (int m = 0; m < w; ++m)
+			s[i++] = ' ';
+	} while ((n /= 10) > 0);
+	if (sign < 0) {
+		s[i++] = '-';
+	}
+	s[i] = '\0';		/* i forget this. */
+	reverse(s);
 }
 
 void itob(int in, char s[], int b)
@@ -99,6 +124,6 @@ void printfS(char v[])
 {
 	int n = strlen(v);
 	for (int i = 0; i < n; ++i)
-		printf("%c ", v[i]);
+		printf("%c", v[i]);
 	printf("\n");
 }
