@@ -3,6 +3,7 @@
 #include <limits.h>
 
 void itoa(int n, char s[]);
+void itob(int n, char s[], int b);
 void printfS(char v[]);
 void reverse(char s[]);
 
@@ -14,10 +15,51 @@ int main(void)
 	int i = -2147483648;
 	char s[100];
 
-	itoa(i, s);
+	/* itoa(i, s); */
 	/* reverse(s); */
+	itob(i, s, 16);
 	printfS(s);
 }
+
+void itob(int in, char s[], int b)
+{
+	int i, sign;
+	long int n;
+
+	n = in;
+
+	if ((sign = n) < 0) {
+		n = -n;
+	}
+	printf("n: %ld\n", -n);
+	i = 0;
+	do {
+		switch (b) {
+		case 2:
+			s[i++] = n % 2 + '0';
+			break;
+		case 8:
+			s[i++] = n % 8 + '0';
+			break;
+		case 16:
+			if (n % 16 > 9) {
+				s[i++] = (n % 16 - 9) + 'A';
+			} else {
+				s[i++] = n % 16 + '0';
+			}
+			break;
+		default:
+			printf("error base!");
+			break;
+		}
+	} while ((n /= b) > 0);
+	if (sign < 0) {
+		s[i++] = '-';
+	}
+	s[i] = '\0';		/* i forget this. */
+	reverse(s);
+}
+
 
 void itoa(int in, char s[])
 {
