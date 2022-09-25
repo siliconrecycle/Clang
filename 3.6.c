@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <limits.h>
 
 void itoa(int n, char s[]);
 void printfS(char v[]);
@@ -7,36 +8,33 @@ void reverse(char s[]);
 
 int main(void)
 {
-	int i = -2425;
+	printf("%d\n", INT_MIN);
+	printf("%d\n", INT_MAX);
+
+	int i = -2147483648;
 	char s[100];
-	/* char s[100] = "hello world"; */
 
 	itoa(i, s);
 	/* reverse(s); */
 	printfS(s);
 }
 
-void itoa(int n, char s[])
+void itoa(int in, char s[])
 {
 	int i, sign;
+	long int n;
 
-	/* if ((sign = n) < 0) { */
-	/* 	n = -n; */
-	/* } */
+	n = in;
 
-	if (n < 0) {
+	if ((sign = n) < 0) {
 		n = -n;
-		sign = -1;
 	}
 
+	printf("n: %ld\n", -n);
 	i = 0;
-	s[i++] = '0' + n % 10;
-	while ((n = n / 10) > 0) {
-		s[i++] = '0' + n % 10;
-	}
-	/* do { */
-	/* 	s[i++] = n % 10 + '0'; */
-	/* } while ((n =/ 10) > 0); */
+	do {
+		s[i++] = n % 10 + '0';
+	} while ((n /= 10) > 0);
 	if (sign < 0) {
 		s[i++] = '-';
 	}
