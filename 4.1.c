@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <string.h>
+
 #define MAXLINE 1000
 
 int getline01(char s[], int lim);
@@ -13,8 +15,9 @@ int main(void) {
 	while (getline01(s, MAXLINE) > 0) {
 		int t = strindex(s, pattern);
 		printf("t: %d\n", t);
+
 		if (strindex(s, pattern) >= 0) {
-			printf("%s", s);
+			printf("s: %s", s);
 			found++;
 		}
 	}
@@ -24,12 +27,15 @@ int main(void) {
 int strindex(char s[], char t[])
 {
 	int i, j, k;
-	for (i = 0; s[i] != '\0'; ++i) {
-		for (j = i, k = 0; t[k] != '\0' && t[k] == s[j]; ++j, ++k)
+	int n, m;
+	n = strlen(s) - 1;
+	m = strlen(t) - 1;
+	for (i = n; i >= 0; --i) {
+		for (j = i, k = m; k >= 0 && t[k] == s[j]; --k, --j)
 			;
-		printf("k: %d\n", k);
-		if (k > 0 && t[k] != '\0')
-			return i;
+		printf("i: %d\n", i);
+		if (k < 0)
+			return n - i;
 	}
 	return -1;
 }
