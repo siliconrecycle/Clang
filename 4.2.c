@@ -29,7 +29,8 @@ int main(void) {
 int atoi(char s[])
 {
 	double atof(char []);
-	return (int)atof(s);
+	/* return (int)atof(s); */
+	return atof(s);
 }
 
 /* double atof(char s[]) */
