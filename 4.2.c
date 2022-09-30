@@ -8,12 +8,12 @@
 int atoi(char s[]);
 
 int main(void) {
-	/* char f[] = "-1.234"; */
-	/* double atof(char s[]); */
-	/* printf("%f\n", atof(f)); */
+	char f[] = "-1.234";
+	double atof(char s[]);
+	printf("%f\n", atof(f));
 	
-	char i[] = "123123.1231";
-	printf("%d\n", atoi(i));
+	/* char i[] = "123123.1231"; */
+	/* printf("%d\n", atoi(i)); */
 
 	/* double sum, atof(char []); */
 	/* /\* double sum; *\/ */
