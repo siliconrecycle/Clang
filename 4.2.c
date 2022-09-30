@@ -8,9 +8,10 @@
 int atoi(char s[]);
 
 int main(void) {
-	char f[] = "-1.234";
+	/* char f[] = "-1.234"; */
+	char f[] = "-123.4e-6";
 	double atof(char s[]);
-	printf("%f\n", atof(f));
+	printf("%e\n", atof(f));
 	
 	/* char i[] = "123123.1231"; */
 	/* printf("%d\n", atoi(i)); */
