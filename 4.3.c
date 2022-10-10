@@ -1,27 +1,19 @@
 #include <stdio.h>
-#include <ctype.h>
 #include <stdlib.h>
 
-#define MAXVAL 100
 #define NUMBER '0'
-#define MAXOP 100
+#define MAXVAL 100
 
-void login(double i);
-
-int getch(void);
-void ungetch(int c);
-
-void push(double i);
+int getop(char []);
+void push(double);
 double pop(void);
 
-int getop(char s[]);
-
 int main(void) {
-	int op, op2;
-	char s[MAXOP];
-
-	while ((op = getop(s)) != EOF) {
-		switch (op) {
+	int type;
+	double op;
+	char s[MAXVAL];
+	while ((type = getop(s)) != EOF) {
+		switch (type) {
 		case NUMBER:
 			push(atof(s));
 			break;
@@ -32,61 +24,41 @@ int main(void) {
 			push(pop() * pop());
 			break;
 		case '-':
-			op2 = pop();
-			push(pop() - op2);
+			op = pop();
+			push(pop() - op);
 			break;
 		case '/':
-			op2 = pop();
+			op = pop();
 			if (op == 0.0)
-				printf("error: divider is zero\n");
+				printf("error: it is not a divider!\n");
 			else
-				push(pop() / op2);
+				push(pop() / op);
 			break;
 		case '\n':
 			printf("\tresult: %g\n", pop());
 			break;
 		default:
 			printf("error: unknown operator!\n");
+			break;
 		}
 	}
+	return 0;
 }
 
-void login(double i)
-{
-	printf("log in: %g\n", i);
-}
+#include <ctype.h>
 
-#define BUFSIZE 100
-
-char buf[BUFSIZE];
-int bufp = 0;
-
-int getch(void)
-{
-	return (bufp > 0) ? buf[--bufp] : getchar();
-	/* if (sp2 > 0) */
-	/* 	return stack[--sp2]; */
-	/* else { */
-	/* 	return getchar(); */
-	/* } */
-}
-
-void ungetch(int c)
-{
-	if (bufp < BUFSIZE)
-		buf[bufp++] = c;
-	else
-		printf("error: too much char!\n");
-}
+int getch(void);
+void ungetch(int);
 
 int getop(char s[])
 {
 	int c, i;
-
-       	while ((s[0] = c = getch()) == ' ' || c == '\t')
+	
+	while ((s[0] = c = getch()) == ' ' || c == '\t')
 		;
+
 	s[1] = '\0';
-	if (!isdigit(c) && (c != '.'))
+	if (!isdigit(c) && c != '.')
 		return c;
 	i = 0;
 	if (isdigit(c))
@@ -95,44 +67,50 @@ int getop(char s[])
 	if (c == '.')
 		while (isdigit(s[++i] = c = getch()))
 			;
-	/* for (i = 1; isdigit(c); ++i) { */
-	/* 	s[i] = c; */
- 	/* 	c = getch(); */
-	/* } */
-	/* if (c == '.') */
-	/* 	s[i] = c; */
-	/* for (i = 1; isdigit(c); ++i) { */
-	/* 	s[i] = c; */
-	/* 	c = getch(); */
-	/* }	 */
-
-       	s[i] = '\0';
-	
-	if (c != EOF) {
+	s[i] = '\0';
+	if (c != EOF)
 		ungetch(c);
-	}
 	return NUMBER;
 }
 
-double val[MAXVAL];
+#define BUFSIZE 10
+
+char buf[BUFSIZE];
+int bufp = 0;
+
+int getch(void)
+{
+	return (bufp > 0) ? buf[--bufp] : getchar();
+}
+	
+void ungetch(int c)
+{
+	if (bufp >= BUFSIZE)
+		printf("error: too much characters in buf!\n");
+	else
+		buf[bufp++] = c;
+}
+
+#define MAXOP 100
+	
+double val[MAXOP];
 int sp = 0;
 
-void push(double i)
+void push(double f)
 {
-	if (sp < MAXVAL)
-		val[sp++] = i;
+	if (sp >= MAXOP)
+		printf("error: too much operators!\n");
 	else
-		printf("error: number is too big.\n");
-	
-	printf("%g\n", val[sp - 1]);
+		val[sp++] = f;
 }
 
 double pop(void)
 {
+	/* return (sp > 0) ? val[--sp] : 0.0; */
 	if (sp > 0)
 		return val[--sp];
 	else {
-		printf("error: no number!\n");
+		printf("error: stack is empty!\n");
 		return 0.0;
 	}
 }
