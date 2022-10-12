@@ -15,6 +15,7 @@ int main(void) {
 	while ((type = getop(s)) != EOF) {
 		switch (type) {
 		case NUMBER:
+			printf("log in\n");
 			push(atof(s));
 			break;
 		case '+':
@@ -53,7 +54,7 @@ void ungetch(int);
 int getop(char s[])
 {
 	int c, i;
-	
+
 	while ((s[0] = c = getch()) == ' ' || c == '\t')
 		;
 
@@ -68,12 +69,16 @@ int getop(char s[])
 		while (isdigit(s[++i] = c = getch()))
 			;
 	s[i] = '\0';
+
+	if (c == EOF)
+		printf("\nEOF!\n");
+
 	if (c != EOF)
 		ungetch(c);
 	return NUMBER;
 }
 
-#define BUFSIZE 10
+#define BUFSIZE 1
 
 char buf[BUFSIZE];
 int bufp = 0;
