@@ -15,7 +15,7 @@ int main(void) {
 	while ((type = getop(s)) != EOF) {
 		switch (type) {
 		case NUMBER:
-			printf("log in\n");
+			/* printf("log in\n"); */
 			push(atof(s));
 			break;
 		case '+':
@@ -70,8 +70,8 @@ int getop(char s[])
 			;
 	s[i] = '\0';
 
-	if (c == EOF)
-		printf("\nEOF!\n");
+	/* if (c == EOF) */
+	/* 	printf("\nEOF!\n"); */
 
 	if (c != EOF)
 		ungetch(c);
