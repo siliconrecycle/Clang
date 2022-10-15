@@ -1,21 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define NUMBER '0'
 #define MAXVAL 100
+#define NUMBER '0'
 
-int getop(char []);
-void push(double);
+int getop(char s[]);
+void push(double f);
 double pop(void);
 
 int main(void) {
-	int type;
-	double op;
+	int type, op2;
 	char s[MAXVAL];
+
 	while ((type = getop(s)) != EOF) {
 		switch (type) {
 		case NUMBER:
-			/* printf("log in\n"); */
 			push(atof(s));
 			break;
 		case '+':
@@ -25,97 +24,89 @@ int main(void) {
 			push(pop() * pop());
 			break;
 		case '-':
-			op = pop();
-			push(pop() - op);
+			op2 = pop();
+			push(pop() - op2);
 			break;
 		case '/':
-			op = pop();
-			if (op == 0.0)
-				printf("error: it is not a divider!\n");
+			op2 = pop();
+			if (op2 != 0.0)
+				push(pop() / op2);
 			else
-				push(pop() / op);
+				printf("error: main: '/' 's divider can't be zero!\n");				       
 			break;
 		case '\n':
 			printf("\tresult: %g\n", pop());
 			break;
 		default:
-			printf("error: unknown operator!\n");
+			printf("error: main(): known operator!\n");
 			break;
 		}
 	}
-	return 0;
+}
+
+#define MAXNUM 100
+
+char val[MAXNUM];
+int sp = 0;
+
+void push(double f)
+{
+	if (sp < MAXNUM)
+		val[sp++] = f;
+	else
+		printf("error: push: the number of val is full!\n");
+}
+
+double pop(void)
+{
+	if (sp > 0)
+		return val[--sp];
+	else
+		printf("error: push: the number of val is empty!\n");
 }
 
 #include <ctype.h>
 
 int getch(void);
-void ungetch(int);
+void ungetch(char c);
 
 int getop(char s[])
 {
-	int c, i;
-
+	int c;
 	while ((s[0] = c = getch()) == ' ' || c == '\t')
 		;
-
 	s[1] = '\0';
 	if (!isdigit(c) && c != '.')
 		return c;
-	i = 0;
+	
+	int i = 1;
 	if (isdigit(c))
-		while (isdigit(s[++i] = c = getch()))
+		while (isdigit(s[i++] = c = getch()))
 			;
 	if (c == '.')
-		while (isdigit(s[++i] = c = getch()))
+		while (isdigit(s[i++] = c = getch()))
 			;
 	s[i] = '\0';
-
-	/* if (c == EOF) */
-	/* 	printf("\nEOF!\n"); */
 
 	if (c != EOF)
 		ungetch(c);
 	return NUMBER;
 }
 
-#define BUFSIZE 1
+#define MAXBUF 10
 
-char buf[BUFSIZE];
+char buf[MAXBUF];
 int bufp = 0;
 
 int getch(void)
 {
 	return (bufp > 0) ? buf[--bufp] : getchar();
 }
-	
-void ungetch(int c)
+
+void ungetch(char c)
 {
-	if (bufp >= BUFSIZE)
-		printf("error: too much characters in buf!\n");
-	else
+	if (bufp < MAXBUF)
 		buf[bufp++] = c;
-}
-
-#define MAXOP 100
-	
-double val[MAXOP];
-int sp = 0;
-
-void push(double f)
-{
-	if (sp >= MAXOP)
-		printf("error: too much operators!\n");
 	else
-		val[sp++] = f;
-}
-
-double pop(void)
-{
-	/* return (sp > 0) ? val[--sp] : 0.0; */
-	if (sp > 0)
-		return val[--sp];
-	else {
-		printf("error: stack is empty!\n");
-		return 0.0;
-	}
+		printf("error: main: getop: ungetch: buf is full!\n");
 }
