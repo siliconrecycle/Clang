@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #define MAXVAL 100
 #define NUMBER '0'
@@ -9,7 +10,8 @@ void push(double f);
 double pop(void);
 
 int main(void) {
-	int type, op2;
+	int type;
+	double op2;
 	char s[MAXVAL];
 
 	while ((type = getop(s)) != EOF) {
@@ -34,6 +36,13 @@ int main(void) {
 			else
 				printf("error: main: '/' 's divider can't be zero!\n");				       
 			break;
+		case '%':
+			op2 = pop();
+			if (op2 != 0.0)
+			  push(fmod(pop(), op2));
+			else
+				printf("error: main: '%' 's divider can't be zero!\n");				       
+			break;			
 		case '\n':
 			printf("\tresult: %g\n", pop());
 			break;
