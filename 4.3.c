@@ -4,6 +4,7 @@
 
 #define MAXVAL 100
 #define NUMBER '0'
+#define LETTER '1'
 
 int getop(char s[]);
 void push(double f);
@@ -15,9 +16,17 @@ int main(void) {
 	int type;
 	double op2;
 	char s[MAXVAL];
-
+	double alph[26] = {0};
+	
 	while ((type = getop(s)) != EOF) {
 		switch (type) {
+		case LETTER:
+			printf("log in: %c\n", s[0]);
+			alph[s[0] - 'a'] = pop();
+			for (int i = 0; i < 26; i++) {
+				printf("%c %g\n", 'a' + i, alph[i]);
+			}
+			break;
 		case '&':
 			op2 = pop();
 			push(pow(pop(), op2));
@@ -112,6 +121,10 @@ int getop(char s[])
 	while ((s[0] = c = getch()) == ' ' || c == '\t')
 		;
 	s[1] = '\0';
+
+	if (isalpha(c))
+		return LETTER;
+
 	if (!isdigit(c) && c != '.')
 		return c;
 	
