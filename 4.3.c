@@ -8,6 +8,8 @@
 int getop(char s[]);
 void push(double f);
 double pop(void);
+void swap(void);
+void clear(void);
 
 int main(void) {
 	int type;
@@ -16,6 +18,16 @@ int main(void) {
 
 	while ((type = getop(s)) != EOF) {
 		switch (type) {
+		case '&':
+			op2 = pop();
+			push(pow(pop(), op2));
+			/* push(exp(pop())); */
+			/* push(sin(pop())); */
+			break;
+		case '?':
+			/* swap(); */
+			clear();
+			break;
 		case NUMBER:
 			push(atof(s));
 			break;
@@ -55,8 +67,21 @@ int main(void) {
 
 #define MAXNUM 100
 
-char val[MAXNUM];
+double val[MAXNUM];
 int sp = 0;
+
+void clear(void)
+{
+	sp = 0;
+}
+
+void swap(void)
+{
+	double s[2];
+	s[0] = val[sp - 1];
+	s[1] = val[sp - 2];
+	printf("%g %g\n", s[0], s[1]);
+}
 
 void push(double f)
 {
@@ -70,8 +95,10 @@ double pop(void)
 {
 	if (sp > 0)
 		return val[--sp];
-	else
-		printf("error: push: the number of val is empty!\n");
+	else {
+		printf("pop: the number of val is zero!\n");
+		return 0.0;
+	}
 }
 
 #include <ctype.h>
