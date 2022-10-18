@@ -128,8 +128,10 @@ int getop(char s[])
 	if (isalpha(c))
 		return LETTER;
 
-	if (!isdigit(c) && c != '.')
+	if (!isdigit(c) && c != '.') {
+		printf("getop: %c\n", c);
 		return c;
+	}
 	
 	int i = 1;
 	if (isdigit(c))
@@ -144,9 +146,14 @@ int getop(char s[])
 	/* ungets(s); */
 	/* printf("s: %s\n", s); */
 
+	/* if (c == EOF) { */
+	/* 	printf("getop: eof!\n"); */
+	/* 	printf("s: %s\n", s); */
+	/* } */
 
-	if (c != EOF)
-		ungetch(c);
+	ungetch(c);
+	/* if (c != EOF) */
+	/* 	ungetch(c); */
 	return NUMBER;
 }
 
@@ -158,11 +165,23 @@ int bufp = 0;
 
 int getch(void)
 {
-	return (bufp > 0) ? buf[--bufp] : getchar();
+	int c = getchar();
+	if (bufp > 0) {
+		c = buf[--bufp];
+		printf("getch: %c\n", c);
+	}
+	return c;
+	/* return (bufp > 0) ? buf[--bufp] : getchar();  */
 }
 
 void ungetch(char c)
 {
+	/* // examize input is eof. */
+	/* if (c == EOF) { */
+	/* 	printf("ungetch: eof!\n"); */
+	/* 	printf("s: %c\n", c); */
+	/* } */
+
 	if (bufp < MAXBUF)
 		buf[bufp++] = c;
 	else
