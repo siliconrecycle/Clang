@@ -141,7 +141,7 @@ int getop(char s[])
 	s[i] = '\0';
 
 	/* printf("getop: s: %s\n", s); */
-	ungets(s);
+	/* ungets(s); */
 	/* printf("s: %s\n", s); */
 
 
@@ -151,7 +151,7 @@ int getop(char s[])
 }
 
 #include <string.h>
-#define MAXBUF 10
+#define MAXBUF 1
 
 char buf[MAXBUF];
 int bufp = 0;
