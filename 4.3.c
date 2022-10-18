@@ -20,23 +20,25 @@ int main(void) {
 	
 	while ((type = getop(s)) != EOF) {
 		switch (type) {
-		case LETTER:
-			printf("log in: %c\n", s[0]);
-			alph[s[0] - 'a'] = pop();
-			for (int i = 0; i < 26; i++) {
-				printf("%c %g\n", 'a' + i, alph[i]);
-			}
-			break;
-		case '&':
-			op2 = pop();
-			push(pow(pop(), op2));
-			/* push(exp(pop())); */
-			/* push(sin(pop())); */
-			break;
-		case '?':
-			/* swap(); */
-			clear();
-			break;
+		/* case LETTER: */
+		/* 	printf("log in: %c\n", s[0]); */
+		/* 	alph[s[0] - 'a'] = pop(); */
+		/* 	for (int i = 0; i < 26; i++) { */
+		/* 		printf("%c %g\n", 'a' + i, alph[i]); */
+		/* 	} */
+		/* 	break; */
+
+
+		/* case '&': */
+		/* 	op2 = pop(); */
+		/* 	push(pow(pop(), op2)); */
+		/* 	/\* push(exp(pop())); *\/ */
+		/* 	/\* push(sin(pop())); *\/ */
+		/* 	break; */
+		/* case '?': */
+		/* 	/\* swap(); *\/ */
+		/* 	clear(); */
+		/* 	break; */
 		case NUMBER:
 			push(atof(s));
 			break;
@@ -65,6 +67,7 @@ int main(void) {
 				printf("error: main: '%' 's divider can't be zero!\n");				       
 			break;			
 		case '\n':
+			printf("main: s: <%s>\n", s);
 			printf("\tresult: %g\n", pop());
 			break;
 		default:
@@ -112,48 +115,46 @@ double pop(void)
 
 #include <ctype.h>
 
+#define MAXLINE 100
+
 int getch(void);
 void ungetch(char c);
 
 void ungets(char s[]);
 void printb(void);
+int getline01(char s[], int lim);
+
+char val01[MAXLINE];
+int sp01 = 0;
+int nm = 0;
 
 int getop(char s[])
 {
-	int c;
-	while ((s[0] = c = getch()) == ' ' || c == '\t')
+	if (sp01 >= nm) {
+		nm = getline01(val01, MAXLINE);
+		sp01 = 0;
+	}
+
+	while ((s[0] = val01[sp01++]) == ' ' || s[0] == '\t')
 		;
 	s[1] = '\0';
-
-	if (isalpha(c))
-		return LETTER;
-
-	if (!isdigit(c) && c != '.') {
-		printf("getop: %c\n", c);
-		return c;
-	}
+	if (!isdigit(s[0]) && s[0] != '.')
+		return s[0];
+	/* printf("getop01: nm: %d, sp01: %d, val01: <%s>\n", nm, sp01, val01); */
 	
 	int i = 1;
-	if (isdigit(c))
-		while (isdigit(s[i++] = c = getch()))
-			;
-	if (c == '.')
-		while (isdigit(s[i++] = c = getch()))
-			;
+	if (isdigit(s[0]))
+		while ((sp01 < nm - 1) && isdigit(s[i++] = val01[sp01++]))
+		       ;
+
+	if (s[i - 1] == '.')
+		while ((sp01 < nm - 1) && isdigit(s[i++] = val01[sp01++]))
+		       ;
+	/* printf("getop02: s: <%s>\n", s);	 */
+	/* printf("getop02: i: <%d>\n", i); */
 	s[i] = '\0';
 
-	/* printf("getop: s: %s\n", s); */
-	/* ungets(s); */
-	/* printf("s: %s\n", s); */
-
-	/* if (c == EOF) { */
-	/* 	printf("getop: eof!\n"); */
-	/* 	printf("s: %s\n", s); */
-	/* } */
-
-	ungetch(c);
-	/* if (c != EOF) */
-	/* 	ungetch(c); */
+	printf("getop03: sp01: %d, nm: %d, i: %d\n", sp01, nm, i);
 	return NUMBER;
 }
 
@@ -230,3 +231,17 @@ void ungets(char s[])
 	printf("buf: %s\n", buf);
 }
 	
+int getline01(char s[], int lim)
+{
+	int c, i;
+
+	i = 0;
+	while (lim-- > 0 && (c = getchar()) != EOF && c != '\n') {
+		s[i++] = c;
+	}
+	if (c == '\n') {
+		s[i++] = '\n';
+	}
+	s[i] = '\0';	
+	return i;
+}
