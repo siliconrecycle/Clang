@@ -115,6 +115,9 @@ double pop(void)
 int getch(void);
 void ungetch(char c);
 
+void ungets(char s[]);
+void printb(void);
+
 int getop(char s[])
 {
 	int c;
@@ -137,11 +140,17 @@ int getop(char s[])
 			;
 	s[i] = '\0';
 
+	/* printf("getop: s: %s\n", s); */
+	ungets(s);
+	/* printf("s: %s\n", s); */
+
+
 	if (c != EOF)
 		ungetch(c);
 	return NUMBER;
 }
 
+#include <string.h>
 #define MAXBUF 10
 
 char buf[MAXBUF];
@@ -159,3 +168,46 @@ void ungetch(char c)
 	else
 		printf("error: main: getop: ungetch: buf is full!\n");
 }
+
+void printb()
+{
+	printf("buf: ");
+	for (int i = 0; i < MAXBUF; ++i)
+		printf("%c", buf[i]);
+	printf("\n");
+}
+
+/* void reverse(char s[]) */
+/* { */
+/* 	int n = strlen(s); */
+/* 	int tmp; */
+/* 	int i = 0; */
+/* 	while (i < n / 2) { */
+/* 		tmp = s[i]; */
+/* 		s[i] = s[n - i]; */
+/* 		s[n - i] = tmp; */
+/* 		++i; */
+/* 	} */
+/* } */
+		
+
+void ungets(char s[])
+{
+	int n = strlen(s);
+
+	printf("ungets: input: <%s>", s);
+	printf("len: %d\n", n);
+	
+	/* for (int i = 0; i < n; ++i) { */
+	/* 	if (s[i] == ' ' && i != n - 1) { */
+	/* 		printf("ungets: s[%d]: <%c>\n", i, s[i]); */
+	/* 		printf("ungets: too much strings!\n"); */
+	/* 		return; */
+	/* 	} */
+	/* } */
+
+	for (int i = n - 2; i >= 0; --i)
+		ungetch(s[i]);
+	printf("buf: %s\n", buf);
+}
+	
