@@ -1,27 +1,19 @@
 #include <stdio.h>
 
-#define swap01(t, a, b) \
-	t tmp;\
-	tmp = a;\
-	a = b;\
-	b = tmp;
-
-void swap(int *a, int *b);
+#define SIZE 10
 
 int main(void) {
-	int a, b;
-	a = 10;
-	b = 1;
-	printf("a:%d, b:%d\n", a, b);
+	if(1)
+		printf("hello\n");
 
-	swap(&a, &b);
-	printf("a:%d, b:%d\n", a, b);
-}
+	int n, array[SIZE], getint(int *);
 
-void swap(int *a, int *b)
-{
-	int tmp;
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
+	for(int i = 0; i < SIZE; i++)
+		array[i] = 0;
+
+	for(n = 0; (n < SIZE) && getint(&array[n]) != EOF; n++)
+		;
+
+	for(int i = 0; i < SIZE; i++)
+		printf("array[%d]: %d\n", i,  array[i]);
 }
