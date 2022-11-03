@@ -2,18 +2,20 @@
 
 #define SIZE 10
 
-int main(void) {
-	if(1)
-		printf("hello\n");
+void printa(int a[], int size)
+{
+	int i;
+	for(i = 0; i < size; ++i)
+		printf("a[%d]: %d\n", i, a[i]);
+}
 
-	int n, array[SIZE], getint(int *);
+int main(void) {
+	int n, array[SIZE], getint(int *np);
 
 	for(int i = 0; i < SIZE; i++)
-		array[i] = 0;
+		array[i] = 1;
 
 	for(n = 0; (n < SIZE) && getint(&array[n]) != EOF; n++)
 		;
-
-	for(int i = 0; i < SIZE; i++)
-		printf("array[%d]: %d\n", i,  array[i]);
+	printa(array, SIZE);
 }
