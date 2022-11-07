@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+
+
 void printd (int i);
 void qsort(int v[], int left, int right);
 
