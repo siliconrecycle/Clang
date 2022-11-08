@@ -11,9 +11,13 @@ int main(void) {
 
 int strlen01(char *s)
 {
-	int i;
-
-	for(i = 0; *s++ != '\0'; i++)
+	char *p = s;
+	while(*p !='\0')
+		p++;
 		;
-	return i;
+	return p - s;
+	/* int i; */
+	/* for(i = 0; *s++ != '\0'; i++) */
+	/* 	; */
+	/* return i; */
 }
