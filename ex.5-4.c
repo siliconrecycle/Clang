@@ -1,27 +1,38 @@
 #include <stdio.h>
+#include <string.h>
 
 int strend(char *s, char *t);
 
 int main(void) {
-	char s[] = "hello world";
+	char s[] = "hello world01";
 	char t[] = "world";
+
 	int i = strend(s, t);
+	/* printf("%s\n", s); */
+
 	printf("i: %d\n", i);
-	
-	/* char *s = "hello world"; */
-	/* printf("%c\n", *(s - 23)); */
+
 }
 
 int strend(char *s, char *t)
 {
-	int i;
+	int ls, lt, diff, i;
 
-	while(*s++)
-		;
-	while(*t++)
-		;
-	while(*(--s) == *(--t))
-		;
-	/* printf("t: <%c>\n", *(t + 1)); */
-	return (*(t+1) == 'w') ? 1 : 0;
+	ls = strlen(s);
+	lt = strlen(t);
+	/* printf("ls: %d, lt: %d\n", ls, lt); */
+
+	diff = ls - lt;
+
+	/* printf("s[%d]: %c\n", diff, *(s + diff)); */
+
+	while(*t != '\0') {
+		if(*(s + diff) != *t)
+			return 0;
+		s++;
+		t++;
+	}
+	return 1;
 }
+
+
