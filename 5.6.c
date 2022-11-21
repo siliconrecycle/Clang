@@ -12,7 +12,7 @@ int main(void)
 	int nlines;
 	char *lineptr[MAXLINES];
 
-	printf("log in\n");
+
 	if((nlines = readlines(lineptr, MAXLINES)) > 0) {
 		qsort(lineptr, 0, nlines);
 	} else {
@@ -27,6 +27,7 @@ int main(void)
 #define MAXCHAR 100
 
 int getline01(char *line, int lim);
+char *alloc(int);
 
 int readlines(char *lineptr[], int linemax)
 {
@@ -34,15 +35,27 @@ int readlines(char *lineptr[], int linemax)
 	char *p, line[MAXCHAR];
 
 	nlines = 0;
-	/* while((len = getline01(p, MAXCHAR)) > 0) { */
 	while((len = getline01(line, MAXCHAR)) > 0) {
-		if(nlines < MAXLINES) {
-			line[len-1] = '\0';
+
+		if(nlines >= MAXLINES || (p = alloc(len)) == NULL) {
+			printf("log in");
+			return -1;
+		} else {
+			/* printf("log in"); */
+			line[len - 1] = '\0';
 			strcpy(p, line);
 			lineptr[nlines++] = p;
-		} else {
-			return -1;
 		}
+
+		/* if(nlines < MAXLINES) { */
+		/* 	line[len-1] = '\0'; */
+		/* 	strcpy(p, line); */
+		/* 	lineptr[nlines++] = p; */
+		/* 	printf("log in\n"); */
+		/* } else { */
+		/* 	return -1; */
+		/* } */
+
 	}
 	return nlines;
 }
