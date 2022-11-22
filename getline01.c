@@ -1,15 +1,13 @@
 #include <stdio.h>
 
-int getline01(char s[], int lim)
-{
+int getline01(char s[], int lim) {
 	int c, i;
-
-	i = 0;
-	while (lim-- > 0 && (c = getchar()) != EOF && c != '\n') {
-		s[i++] = c;
+	for (i = 0; i < lim - 1 && (c = getchar()) != EOF && c != '\n'; ++i) {
+		s[i] = c;
 	}
 	if (c == '\n') {
-		s[i++] = '\n';
+		s[i] = '\n';
+		++i;
 	}
 	s[i] = '\0';	
 	return i;

@@ -17,3 +17,19 @@ void afree(char *p)
 	if((p > allocbuf) && (p < allocbuf + ALLOCSIZE))
 		allocp = p;
 }
+
+/* void strcpy01(char *t, char *s) */
+/* { */
+/* 	while(*t++ = *s++) */
+/* 		; */
+/* } */
+
+int strcmp01(char *t, char *s)
+{
+	for(; *t == *s; s++, t++)
+		/* if(*t == '\0'); */
+		if(*t)
+			return 0;
+	return *s - *t;
+}
+

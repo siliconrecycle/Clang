@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include "getline01.c"
+#include "alloc.c"
 
 #define MAXLINES 10
 
@@ -15,19 +17,20 @@ int main(void)
 
 	if((nlines = readlines(lineptr, MAXLINES)) > 0) {
 		qsort(lineptr, 0, nlines);
+		writelines(lineptr, nlines);
+		return 0;
 	} else {
 		printf("error: too many lines!\n");
 		return 1;
 	}
 
-	writelines(lineptr, nlines);
-	return 0;
 }
 
 #define MAXCHAR 100
 
 int getline01(char *line, int lim);
 char *alloc(int);
+/* void strcpy01(char *t, char *s); */
 
 int readlines(char *lineptr[], int linemax)
 {
@@ -38,7 +41,6 @@ int readlines(char *lineptr[], int linemax)
 	while((len = getline01(line, MAXCHAR)) > 0) {
 
 		if(nlines >= MAXLINES || (p = alloc(len)) == NULL) {
-			printf("log in");
 			return -1;
 		} else {
 			/* printf("log in"); */
@@ -60,7 +62,7 @@ int readlines(char *lineptr[], int linemax)
 	return nlines;
 }
 
-
+/* int strcmp01(char *t, char *s); */
 
 void swap (char *v[], int i, int j)
 {
@@ -81,7 +83,7 @@ void qsort(char *v[], int left, int right)
 	swap (v, left, (left + right) / 2);
 	last = left;
 	for (i = left + 1; i <= right; i++) {
-		if (strcmp(v[i], v[left]))
+		if (strcmp(v[i], v[left]) < 0)
 			swap (v, ++last, i);
 	}
 	swap (v, left, last);
