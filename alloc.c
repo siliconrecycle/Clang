@@ -18,17 +18,17 @@ void afree(char *p)
 		allocp = p;
 }
 
-/* void strcpy01(char *t, char *s) */
-/* { */
-/* 	while(*t++ = *s++) */
-/* 		; */
-/* } */
-
-int strcmp01(char *t, char *s)
+void strcpy01(char *t, char *s)
 {
-	for(; *t == *s; s++, t++)
-		/* if(*t == '\0'); */
-		if(*t)
+	while(*t++ = *s++)
+		;
+}
+
+int strcmp01(char *s, char *t)
+{
+	for(; *s == *t; s++, t++)
+		if(*t == '\0')
+		/* if(*t) */
 			return 0;
 	return *s - *t;
 }

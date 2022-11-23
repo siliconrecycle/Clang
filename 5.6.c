@@ -14,9 +14,8 @@ int main(void)
 	int nlines;
 	char *lineptr[MAXLINES];
 
-
 	if((nlines = readlines(lineptr, MAXLINES)) > 0) {
-		qsort(lineptr, 0, nlines);
+		qsort(lineptr, 0, nlines - 1);
 		writelines(lineptr, nlines);
 		return 0;
 	} else {
@@ -30,7 +29,6 @@ int main(void)
 
 int getline01(char *line, int lim);
 char *alloc(int);
-/* void strcpy01(char *t, char *s); */
 
 int readlines(char *lineptr[], int linemax)
 {
@@ -39,11 +37,10 @@ int readlines(char *lineptr[], int linemax)
 
 	nlines = 0;
 	while((len = getline01(line, MAXCHAR)) > 0) {
-
+		/* printf("ptr: %d\n", p == 0); */
 		if(nlines >= MAXLINES || (p = alloc(len)) == NULL) {
 			return -1;
 		} else {
-			/* printf("log in"); */
 			line[len - 1] = '\0';
 			strcpy(p, line);
 			lineptr[nlines++] = p;
@@ -51,18 +48,14 @@ int readlines(char *lineptr[], int linemax)
 
 		/* if(nlines < MAXLINES) { */
 		/* 	line[len-1] = '\0'; */
-		/* 	strcpy(p, line); */
+		/* 	strcpy01(p, line); */
 		/* 	lineptr[nlines++] = p; */
-		/* 	printf("log in\n"); */
 		/* } else { */
 		/* 	return -1; */
 		/* } */
-
 	}
 	return nlines;
 }
-
-/* int strcmp01(char *t, char *s); */
 
 void swap (char *v[], int i, int j)
 {
@@ -83,7 +76,7 @@ void qsort(char *v[], int left, int right)
 	swap (v, left, (left + right) / 2);
 	last = left;
 	for (i = left + 1; i <= right; i++) {
-		if (strcmp(v[i], v[left]) < 0)
+		if (strcmp01(v[i], v[left]) < 0)
 			swap (v, ++last, i);
 	}
 	swap (v, left, last);
@@ -94,7 +87,8 @@ void qsort(char *v[], int left, int right)
 
 void writelines(char *lineptr[], int linenum)
 {
+	printf("--sort line in alphabetic order--\n");
 	while(linenum--) {
-		printf("%s", *lineptr++);
+		printf("%s\n", *lineptr++);
 	}
 }
