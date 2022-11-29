@@ -21,7 +21,8 @@ int readlines(char *lineptr[], int maxline)
 			/* copyto(lineptr, line, nl); */
 			
 			lineptr[nl++] = line;
-			writelines(lineptr, nl - 1);
+			printf("rl:");
+			writelines(lineptr, nl);
 		} else
 			return -1;
 	}
