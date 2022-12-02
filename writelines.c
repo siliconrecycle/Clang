@@ -4,6 +4,6 @@ void writelines(char *lineptr[], int num)
 {
 	printf("writeline:\n");
 	while(num-- > 0)
-		printf("%s", *lineptr++);
-	printf("\nend.\n");
+		printf("%s\n", *lineptr++);
+	printf("end.\n");
 }

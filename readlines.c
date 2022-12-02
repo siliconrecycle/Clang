@@ -14,8 +14,8 @@ int readlines(char *lineptr[], int maxline)
 			copyto(lineptr, line, nl++);
 			
 			/* lineptr[nl++] = line; */
-			printf("rl:");
-			writelines(lineptr, nl);
+			/* printf("rl:"); */
+			/* writelines(lineptr, nl); */
 		} else
 			return -1;
 	}
@@ -29,7 +29,6 @@ int main(void) {
 	/* char *store01[100] = {"hello ", "world"}; */
 
 	n = readlines(store, max);
-
 
 	writelines(store, n);
 }
