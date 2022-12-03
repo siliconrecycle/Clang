@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "readlines.h"
 
-#define MAXCHAR 10
+#define MAXCHAR 100
 
 int readlines(char *lineptr[], int maxline)
 {
@@ -23,12 +23,13 @@ int readlines(char *lineptr[], int maxline)
 }
 
 
-int main(void) {
-	char *store[100];
-	int max = 10, n;
-	/* char *store01[100] = {"hello ", "world"}; */
+/* int main(void) { */
+/* 	char *store[100]; */
+/* 	int max = 10, n; */
+/* 	/\* char *store01[100] = {"hello ", "world"}; *\/ */
 
-	n = readlines(store, max);
+/* 	n = readlines(store, max); */
 
-	writelines(store, n);
-}
+/* 	writelines(store, n); */
+/* } */
+
