@@ -32,4 +32,3 @@ int readlines(char *lineptr[], int maxline)
 
 /* 	writelines(store, n); */
 /* } */
-

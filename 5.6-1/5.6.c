@@ -76,7 +76,7 @@ void qsort(char *v[], int left, int right)
 	swap (v, left, (left + right) / 2);
 	last = left;
 	for (i = left + 1; i <= right; i++) {
-		if (strcmp01(v[i], v[left]) < 0)
+		if (strcmp(v[i], v[left]) < 0)
 			swap (v, ++last, i);
 	}
 	swap (v, left, last);
@@ -87,7 +87,6 @@ void qsort(char *v[], int left, int right)
 
 void writelines(char *lineptr[], int linenum)
 {
-	printf("--sort line in alphabetic order--\n");
 	while(linenum--) {
 		printf("%s\n", *lineptr++);
 	}

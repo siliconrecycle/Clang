@@ -1,4 +1,3 @@
-
 void qsort(char *lineptr[], int left, int right);
 int readlines(char *lineptr[], int maxline);
 void writelines(char *lineptr[], int num);

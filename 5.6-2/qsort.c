@@ -14,7 +14,7 @@ void printd (int i);
 /* 	/\* for (i = 0; i < 5; i++) *\/ */
 /* 	/\* 	printf ("%d\n", v[i]); *\/ */
 
-/* 	char *str[100] = {"cabcedef\n","bcdefg\n", "abcdefg\n", "bcdefg\n"}; */
+/* 	char *str[100] = {"cabcedef\n","bcdefg\n", "abcdefg\n", "bceefg\n"}; */
 /* 	writelines(str, 4); */
 /* 	qsort(str, 0, 3); */
 
