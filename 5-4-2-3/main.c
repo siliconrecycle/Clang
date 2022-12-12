@@ -10,7 +10,7 @@ int main(void) {
 
 	int year, month, day, of_day;
 
-	year = 2022, month = 12, day = 11;
+	year = 2022, month = 12, day = 32;
 
 	of_day = day_of_year(year, month, day);
 	printf("%d month %d day is %d year %d day\n", month, day, year, of_day);
@@ -19,7 +19,7 @@ int main(void) {
 	/* //3. finish day_of_month */
 	/* int year, of_day, month, day; */
 
-	/* year = 2020, of_day = 60; */
+	/* year = 2020, of_day = 366; */
 
 	/* day_of_month(year, of_day, &month, &day); */
 
@@ -59,6 +59,11 @@ int day_of_year(int year, int month, int day)
 	day_of_year = 0;
 	leap = is_leap_year(year);
 
+	if(month < 1 || month > 13)
+		return -1;
+	if(day < 1 || day > monthes[leap][month])
+		return -1;
+	
 	for(i = 1; i < month; i++) {
 		day_of_year += monthes[leap][i];
 	}
@@ -72,6 +77,12 @@ void day_of_month(int year, int of_day, int *month, int *day)
 	int leap;
 	leap = is_leap_year(year);
 
+	if(of_day <= 0 || ((of_day > 366) && leap) || ((of_day > 365) && !leap)) {
+		printf("error: %d is too large for a year!\n", of_day);
+		*day = -1;
+		*month = -1;
+		return;
+	}
 	calculate_month_of_day(monthes[leap], of_day, month, day);
 }
 	
@@ -79,7 +90,7 @@ void day_of_month(int year, int of_day, int *month, int *day)
 void calculate_month_of_day(char *monthes, int of_day, int *month, int *day)
 {
 	int i;
-
+	
 	for(i = 1; of_day > monthes[i]; i++)
 		of_day -= monthes[i];
 	*month = i;
