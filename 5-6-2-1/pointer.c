@@ -5,11 +5,11 @@ int main(void) {
 	/* int *nums = {1, 2, 3, 4, 5}; */
 	/* printf("%d\n", nums++); */
 
-	// 2. char
-	/* char *msg = "hello world qian"; */
-	char *msg = {'h', 'e', 'l', 'l', 'o'};
-	printf("%s\n", msg);
-	// printf("%s\n", *msg);
+	/* // 2. char */
+	/* /\* char *msg = "hello world qian"; *\/ */
+	/* char *msg = {'h', 'e', 'l', 'l', 'o'}; */
+	/* printf("%s\n", msg); */
+	/* // printf("%s\n", *msg); */
 
 
 
@@ -37,13 +37,14 @@ int main(void) {
 	/* *p--; */
 	/* printf("%s\n", *p); */
 
-	/* int a = 10, b = 20; */
-	/* int *p = &a; */
+	int a = 10, b = 20;
+	int *p = &a;
 
-	/* /\* (*p)++; *\/ */
-	/* /\* printf("%d\n", *p); *\/ */
 
-	/* ++*p; */
-	/* printf("%d\n", *p); */
+	/* printf("%d\n", 	(*p)++); */
+	/* printf("%d\n", 	*p); */
 
+
+	printf("%d\n", ++*p);
+	printf("%d\n", *p);
 }
