@@ -57,7 +57,7 @@ int main(int argc, char *argv[]) {
 			printf("\tresult: %g\n", pop());
 			break;
 		default:
-			printf("default: type: %d\n", type);
+			printf("default: type: %c\n", type);
 			printf("error: main(): unknown operator!\n");
 			break;
 		}
@@ -83,34 +83,34 @@ int nm = 0;
 
 int getcmdline(char s[], int argc, char *argv[])
 {
-	printf("getcmdline: ");
-	printf("argc: %d ", argc);
+	/* printf("getcmdline: "); */
+	/* printf("argc: %d ", argc); */
 	char tmp[MAXLINE] = "";
 	while(--argc > 0) {
 		strcat(tmp, *++argv);
 		strcat(tmp, (argc > 1) ? " " : "");
 	}
 	strcat(tmp, "\n");
+	tmp[strlen(tmp)] = EOF;
 	strcpy(s, tmp);
-	printf("s: <%s>\n", s);
 	return strlen(s);
 }
 
 int getop(char s[], int argc, char *argv[])
 {
-	printf("getop: ");
-	printargv(argc, argv);
+	/* printf("getop: "); */
+	/* printargv(argc, argv); */
 
 	int c, i;
 
-	if (sp01 > nm) {
+	if (sp01 >= nm) {
 		/* nm = getline01(val01, MAXLINE); */
 		nm = getcmdline(val01, argc, argv);
 		/* printf("nm = %d, val01: <%s>\n", nm, val01); */
 		sp01 = 0;
 	}
 
-	printf("getop01: nm: %d, sp01: %d, val01: <%s>\n", nm, sp01, val01);
+	/* printf("getop01: nm: %d, sp01: %d, val01: <%s>\n", nm, sp01, val01); */
 
 	while ((s[0] = c = val01[sp01++]) == ' ' || c == '\t')
 		;

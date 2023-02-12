@@ -1,0 +1,61 @@
+
+4.3.c,759
+#define MAXVAL MAXVAL5,58
+#define NUMBER NUMBER6,77
+#define LETTER LETTER7,96
+int main(void) {main15,212
+#define MAXNUM MAXNUM80,1488
+double val[MAXNUM];val82,1508
+int sp = 0;sp83,1528
+void clear(void)clear85,1541
+void swap(void)swap90,1572
+void push(double f)push98,1681
+double pop(void)pop106,1802
+#define MAXLINE MAXLINE118,1949
+char val01[MAXLINE];val01127,2087
+int sp01 = 0;sp01128,2108
+int nm = 0;nm129,2122
+int getop(char s[])getop131,2135
+#define MAXBUF MAXBUF162,2822
+char buf[MAXBUF];buf164,2840
+int bufp = 0;bufp165,2858
+int getch(void)getch167,2873
+void ungetch(char c)ungetch178,3045
+void printb()printb192,3303
+void ungets(char s[])ungets214,3640
+int getline01(char s[], int lim)getline01234,4043
+
+main.c,590
+#define MAXVAL MAXVAL8,97
+#define NUMBER NUMBER9,116
+#define LETTER LETTER10,135
+int main(int argc, char *argv[]) {main19,276
+#define MAXLINE MAXLINE70,1194
+char val01[MAXLINE];val0179,1332
+int sp01 = 0;sp0180,1353
+int nm = 0;nm81,1367
+int getop(char s[], int argc, char *argv[])getop83,1380
+#define MAXBUF MAXBUF117,2142
+char buf[MAXBUF];buf119,2160
+int bufp = 0;bufp120,2178
+int getch(void)getch122,2193
+void ungetch(char c)ungetch133,2365
+void printb()printb147,2623
+void ungets(char s[])ungets169,2960
+int getline01(char s[], int lim)getline01189,3363
+
+utils.c,54
+void printargv(int argc, char *argv[])printargv3,20
+
+stack.c,193
+#define MAXNUM MAXNUM3,20
+double val[MAXNUM];val5,40
+int sp = 0;sp6,60
+void clear(void)clear8,73
+void swap(void)swap13,104
+void push(double f)push21,213
+double pop(void)pop29,334
+
+a.out,0
+
+TAGS,0
