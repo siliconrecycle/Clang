@@ -1,3 +1,6 @@
+# ignore ETAGS
+TAGS
+
 # ignore Emacs backup file
 *~
 \#*\#

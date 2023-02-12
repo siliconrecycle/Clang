@@ -2,18 +2,16 @@
 #include <stdlib.h>
 #include <math.h>
 
-#include "utils.c"
-#include "stack.c"
+#include "expr.h"
+
+/* #include "utils.c" */
+/* #include "stack.c" */
 
 #define MAXVAL 100
 #define NUMBER '0'
 #define LETTER '1'
 
 int getop(char s[], int argc, char *argv[]);
-void push(double f);
-double pop(void);
-void swap(void);
-void clear(void);
 
 int main(int argc, char *argv[]) {
 	int type;
