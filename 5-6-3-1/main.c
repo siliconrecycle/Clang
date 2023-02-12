@@ -15,7 +15,6 @@ double pop(void);
 void swap(void);
 void clear(void);
 
-
 int main(int argc, char *argv[]) {
 	int type;
 	double op2;
@@ -58,7 +57,8 @@ int main(int argc, char *argv[]) {
 			printf("\tresult: %g\n", pop());
 			break;
 		default:
-			printf("error: main(): known operator!\n");
+			printf("default: type: %d\n", type);
+			printf("error: main(): unknown operator!\n");
 			break;
 		}
 	}
@@ -66,6 +66,7 @@ int main(int argc, char *argv[]) {
 
 
 #include <ctype.h>
+#include <string.h>
 
 #define MAXLINE 100
 
@@ -80,36 +81,59 @@ char val01[MAXLINE];
 int sp01 = 0;
 int nm = 0;
 
+int getcmdline(char s[], int argc, char *argv[])
+{
+	printf("getcmdline: ");
+	printf("argc: %d ", argc);
+	char tmp[MAXLINE] = "";
+	while(--argc > 0) {
+		strcat(tmp, *++argv);
+		strcat(tmp, (argc > 1) ? " " : "");
+	}
+	strcat(tmp, "\n");
+	strcpy(s, tmp);
+	printf("s: <%s>\n", s);
+	return strlen(s);
+}
+
 int getop(char s[], int argc, char *argv[])
 {
 	printf("getop: ");
 	printargv(argc, argv);
 
-	if (sp01 >= nm) {
-		nm = getline01(val01, MAXLINE);
+	int c, i;
+
+	if (sp01 > nm) {
+		/* nm = getline01(val01, MAXLINE); */
+		nm = getcmdline(val01, argc, argv);
+		/* printf("nm = %d, val01: <%s>\n", nm, val01); */
 		sp01 = 0;
 	}
 
-	while ((s[0] = val01[sp01++]) == ' ' || s[0] == '\t')
+	printf("getop01: nm: %d, sp01: %d, val01: <%s>\n", nm, sp01, val01);
+
+	while ((s[0] = c = val01[sp01++]) == ' ' || c == '\t')
 		;
-	s[1] = '\0';
-	if (!isdigit(s[0]) && s[0] != '.')
-		return s[0];
-	/* printf("getop01: nm: %d, sp01: %d, val01: <%s>\n", nm, sp01, val01); */
 	
-	int i = 1;
-	if (isdigit(s[0]))
-		while ((sp01 < nm - 1) && isdigit(s[i++] = val01[sp01++]))
+	s[1] = '\0';
+	if (!isdigit(c) && c != '.')
+		return c;
+
+	i = 0;
+	if (isdigit(c))
+		while (isdigit(s[++i] = c = val01[sp01++]))
 		       ;
 
-	if (s[i - 1] == '.')
-		while ((sp01 < nm - 1) && isdigit(s[i++] = val01[sp01++]))
+	if (c  == '.')
+		while (isdigit(s[++i] = c = val01[sp01++]))
 		       ;
-	/* printf("getop02: s: <%s>\n", s);	 */
-	/* printf("getop02: i: <%d>\n", i); */
 	s[i] = '\0';
 
-	/* printf("getop03: sp01: %d, nm: %d, i: %d\n", sp01, nm, i); */
+
+
+	/* if(sp01 >= nm) */
+	/* 	return EOF; */
+
 	return NUMBER;
 }
 
@@ -164,7 +188,6 @@ void printb()
 /* 		++i; */
 /* 	} */
 /* } */
-		
 
 void ungets(char s[])
 {
@@ -191,7 +214,7 @@ int getline01(char s[], int lim)
 	int c, i;
 
 	i = 0;
-	while (lim-- > 0 && (c = getchar()) != EOF && c != '\n') {
+	while (lim-- > 0 && (c = getchar()) != EOF && c != '\n') { // EOF is not be included in s[].
 		s[i++] = c;
 	}
 	if (c == '\n') {
