@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 /*
   ex.1-21 write a program entab replaces the spacing with the minimal
   number of space and tab.
@@ -15,22 +13,33 @@
   Note: This program should think about the number of space bigger than TAB and
   smaller than TAB, this will have different result.
 */
+
+#include <stdio.h>
+
 #define TAB 8
 
-int main(void) {
+void entab(int tabnumber) {
 
-	int i, c, s;
-	int n, m;
+	int s, n, m;
+	int tab, c;
 
-	int tab = TAB;
+	tab = TAB;
+
+	if (tabnumber > 0)
+		tab = tabnumber * TAB;
+	else
+		tabnumber = 0;
 
 	while((c = getchar()) != EOF) {
 		for(s = 0; c == ' '; ++s, c = getchar())
 			;
 
+		/* printf("s: %d\n", s); */
+
 		n = (s + 1) / tab;
 		for (; n > 0; --n)
-			putchar('#');
+			for(int i = tabnumber; i > 0; --i)
+				putchar('#');
 
 		m = s % tab;
 
@@ -38,7 +47,7 @@ int main(void) {
 			putchar('*');
 
 		putchar(c);
-		printf("m: %d, n: %d\n", m, n);
+		/* printf("m: %d, n: %d\n", m, n); */
 	}
 			
 
@@ -66,5 +75,4 @@ int main(void) {
 	/* 	} */
 	/* 	putchar(c); */
 	/* } */
-	return 0;
 }
