@@ -31,7 +31,7 @@ void printfspace(int tabnumber, int *p)
 
 }
 
-int main(void) {
+void detab(int tab) {
 	int i, c, s = 0;
 	int *p;
 
@@ -48,27 +48,10 @@ int main(void) {
 		}
 
 		p = &s;
-
-		if(c == '\t')
-			printfspace(0, p);
-	}		
-
-
-	/* 	++i; */
-
-	/* 	if (c == '\t') { */
-	/* 		--i; */
-	/* 		i = i % TAB; */
-	/* 		for (int j = 0; j < TAB - i; ++j) { */
-	/* 			putchar('*'); */
-	/* 		} */
-	/* 		i = 0; */
-	/* 	} else if (c == '\n') { */
-	/* 		putchar(c); */
-	/* 		i = 0; */
-	/* 	} else { */
-	/* 		putchar(c); */
-	/* 	} */
-	/* } */
-
+		
+		/* for (i = 0; i < tab && c == '\t'; ++i, c = getchar()) */
+		/* 	; */
+		if (c = '\t')
+			printfspace(tab * TAB, p);
+	}
 }
