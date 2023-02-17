@@ -17,6 +17,7 @@
 */
 #define TAB 8
 
+
 int main(void) {
 
 	int i, c, s;
@@ -68,3 +69,63 @@ int main(void) {
 	/* } */
 	return 0;
 }
+
+// detab
+
+/* void printfspace(int tabnumber, int *p) */
+/* { */
+/* 	int tab, n; */
+
+/* 	n = *p; */
+/* 	*p = 0; */
+
+/* 	tab = TAB - n; */
+	
+/* 	if (tabnumber > 0) */
+/* 		tab = tabnumber - n; */
+	
+/* 	for (; tab > 0; --tab) */
+/* 		putchar('*'); */
+
+/* } */
+
+/* int main(void) { */
+/* 	int i, c, s = 0; */
+/* 	int *p; */
+
+/* 	while ((c = getchar()) != EOF) { */
+
+/* 		if (c == '\n') { */
+/* 			putchar(c); */
+/* 			s = 0; */
+/* 		} */
+
+/* 		if(c != '\t' && c != '\n') { */
+/* 			putchar(c); */
+/* 			++s; */
+/* 		} */
+
+/* 		p = &s; */
+
+/* 		if(c == '\t') */
+/* 			printfspace(0, p); */
+/* 	}		 */
+
+
+/* 	/\* 	++i; *\/ */
+
+/* 	/\* 	if (c == '\t') { *\/ */
+/* 	/\* 		--i; *\/ */
+/* 	/\* 		i = i % TAB; *\/ */
+/* 	/\* 		for (int j = 0; j < TAB - i; ++j) { *\/ */
+/* 	/\* 			putchar('*'); *\/ */
+/* 	/\* 		} *\/ */
+/* 	/\* 		i = 0; *\/ */
+/* 	/\* 	} else if (c == '\n') { *\/ */
+/* 	/\* 		putchar(c); *\/ */
+/* 	/\* 		i = 0; *\/ */
+/* 	/\* 	} else { *\/ */
+/* 	/\* 		putchar(c); *\/ */
+/* 	/\* 	} *\/ */
+/* 	/\* } *\/ */
+/* } */
