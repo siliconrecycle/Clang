@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "entab.c"
 
 void printargv(int argc, char *argv[])
@@ -11,17 +13,44 @@ void printargv(int argc, char *argv[])
 
 int main(int argc, char *argv[])
 {
-	printf("ex5-11, hello!\n");
-	printargv(argc, argv);
+	int start, tab, c;
+	char s[100];
 
-	int t = 0, c;
-	printf("c: %c\n", (*argv)[0]);
-	if ((*++argv)[0] == '\t')
-		for (t = 1 ;(c = *++argv[0]) == '\t'; ++t)
-			;
-	printf("t: <%d>\n", t);
-	entab(t);
+	start = 0;
+	tab = -1;
+	
+	while (--argc > 0 && (*++argv)[0] == '-') {
+		switch (c = *++argv[0]) {
+		case 'm':
+			strcpy(s, *++argv);
+			start = atoi(s);
+			break;
+		case 'n':
+			strcpy(s, *++argv);
+			tab = atoi(s);
+			break;
+		default:
+			printf("unknown op!\n");
+			break;
+		}
+	}
+	
+	entab(start, tab);
 }
+
+/* int main(int argc, char *argv[]) */
+/* { */
+/* 	printf("ex5-11, hello!\n"); */
+/* 	printargv(argc, argv); */
+
+/* 	int t = 0, c; */
+/* 	printf("c: %c\n", (*argv)[0]); */
+/* 	if ((*++argv)[0] == '\t') */
+/* 		for (t = 1 ;(c = *++argv[0]) == '\t'; ++t) */
+/* 			; */
+/* 	printf("t: <%d>\n", t); */
+/* 	entab(t); */
+/* } */
 
 /* #include "detab.c" */
 
