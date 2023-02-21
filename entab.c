@@ -39,45 +39,50 @@ void entab(int start, int tab)
 	if (tab > 0)
 		n = tab;
 
+	/* printf("1 % 8 = %d\n", 2%8); */
+
 	while ((c = getch()) != EOF) {
 
 		// 1. count total chars.
 		++i;
 
-		// 2. count no space and nor enter char.
-		for (; c != ' ' && c != '\n'; c = getch(), ++a)
+		if (i > m) {
+			// 2. count no space and nor enter char.
+			for (; c != ' ' && c != '\n'; c = getch(), ++a)
+				putchar(c);
+			
+			/* if (c == '\n') { */
+			/* 	s = a = i = 0; */
+			/* 	putchar(c); */
+			/* } */
+			
+			// 3. count space chars.
+			for (; c == ' '; c = getch(), ++s)
+				;
+			
+			/* printf("\ns: %d, a: %d, n: %d\n", s, a, n); */
+			
+			// 4. print space and tab.
+			int x = (s + a) / n;
+			if (x > 0)
+				prints('#', n * x - a);
+
+			int y = (s + a) % n - a;
+			if (y > 0)
+				prints('*', y);
+			s = a = 0;
+
+			if (c == '\n') {
+				s = a = i = 0;
+				i = 0;
+				putchar(c);
+			}
+
+			if (c != '\n')
+				ungetch(c);
+		} else
 			putchar(c);
 			
-		if (c == '\n') {
-			s = a = i = 0;
-			putchar(c);
-		}
-			
-		// 3. count space chars.
-		for (; c == ' '; c = getch(), ++s)
-			;
-			
-		/* printf("\ns: %d, a: %d, n: %d\n", s, a, n); */
-			
-		// 4. print space and tab.
-		int x = (s + a) / n;
-		if (x > 0)
-			prints('#', n * x - a);
-
-		int y = (s + a) % n;
-		if (y > 0)
-			prints('*', y);
-		/* s = a = 0; */
-
-		/* if (c == '\n') { */
-		/* 	s = a = i = 0; */
-		/* 	i = 0; */
-		/* 	putchar(c); */
-		/* } */
-
-		if (c != '\n')
-			ungetch(c);
-
 	}
 }
 			
