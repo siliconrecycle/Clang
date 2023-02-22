@@ -22,18 +22,18 @@ int main(int argc, char *argv[])
 	while (--argc > 0 && (*++argv)[0] == '-') {
 		switch (c = *++argv[0]) {
 		case 'm':
-			printf("m: %s\n", *(argv));
+			/* printf("m: %s\n", *(argv)); */
 			strcpy(s, *(++argv));
 			--argc;
 			start = atoi(s);
-			printf("start: %d\n", start);
+			/* printf("start: %d\n", start); */
 			break;
 		case 'n':
-			printf("n: %s\n", *(argv));
+			/* printf("n: %s\n", *(argv)); */
 			strcpy(s, *(++argv));
 			--argc;
 			tab = atoi(s);
-			printf("tab: %d\n", tab);
+			/* printf("tab: %d\n", tab); */
 			break;
 		default:
 			printf("unknown op!\n");
