@@ -14,7 +14,7 @@ void printargv(int argc, char *argv[])
 int main(int argc, char *argv[])
 {
 	int start, tab, c;
-	char s[100];
+	char s[100] = "";
 
 	start = 0;
 	tab = -1;
@@ -22,12 +22,18 @@ int main(int argc, char *argv[])
 	while (--argc > 0 && (*++argv)[0] == '-') {
 		switch (c = *++argv[0]) {
 		case 'm':
-			strcpy(s, *++argv);
+			printf("m: %s\n", *(argv));
+			strcpy(s, *(++argv));
+			--argc;
 			start = atoi(s);
+			printf("start: %d\n", start);
 			break;
 		case 'n':
-			strcpy(s, *++argv);
+			printf("n: %s\n", *(argv));
+			strcpy(s, *(++argv));
+			--argc;
 			tab = atoi(s);
+			printf("tab: %d\n", tab);
 			break;
 		default:
 			printf("unknown op!\n");

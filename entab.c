@@ -67,7 +67,7 @@ void entab(int start, int tab)
 			if (x > 0)
 				prints('#', n * x - a);
 
-			int y = (s + a) % n - a;
+			int y = (x > 0) ? (s + a) % n : (s + a) % n - a;
 			if (y > 0)
 				prints('*', y);
 			s = a = 0;
