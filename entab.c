@@ -45,14 +45,11 @@ void entab(int start, int tab)
 
 	while ((c = getch()) != EOF) {
 
-		// 1. count total chars.
-		++i;
-
 		if (i > m) {
 			// 2. count no space and nor enter char.
 			for (; c != ' ' && c != '\n'; c = getch(), ++a)
 				putchar(c);
-							
+			
 			// 3. count space chars.
 			for (; c == ' '; c = getch(), ++s)
 				;
@@ -74,17 +71,19 @@ void entab(int start, int tab)
 			s = a = 0;
 
 			if (c == '\n') {
-				s = a = i = 0;
-				i = 0;
 				putchar(c);
 			}
 
 			if (c != '\n')
 				ungetch(c);
 		} else {
+			// 1. count total chars.
+			++i;
 			putchar(c);
 		}
-			
+
+		if (c == '\n')
+			i = 0;
 	}
 }
 			
