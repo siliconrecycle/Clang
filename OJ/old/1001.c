@@ -10,14 +10,13 @@ int main(void) {
 
 void reverse(void)
 {
-	
 	long int n;
-	
-	n = 0;
+	int r;
 
-	if(scanf("%ld", &n) != EOF)
-		reverse();
-	else
-		return;
-	printf("%0.4lf\n", sqrt(n));
+	if ((r = scanf("%ld", &n)) != EOF) {
+	  reverse();
+	}
+
+	if (r != EOF && r != '\n')
+		printf("%0.4lf\n", sqrt(n));
 }
