@@ -17,8 +17,9 @@ int readlines(char *lineptr[], int maxline)
 		if (nl >= n) {
 			for (int i = 0; i < n - 1; ++i) {
 //				strcpy(lineptr[i], lineptr[i + 1]);
-				lineptr[i] = lineptr[i + 1];
-//				printf("%s\n", lineptr[i]);
+				copyto(lineptr, lineptr[i + 1], i);
+//				lineptr[i] = lineptr[i + 1];
+				printf("ptr: %s\n", lineptr[i]);
 			}
 			copyto(lineptr, line, n - 1);
 //			printf("%s\n", lineptr[n - 1]);

@@ -9,8 +9,10 @@ void copyto(char *lineptr[], char *str, int p)
 	int len;
 	len = strlen(str);
 
-	if((ptr = alloc(len)) != 0) {
-		str[len-1] = '\0';
+	printf("log in copyto.c\n");
+	printf("s: %s\n", str);
+	if((ptr = alloc(len)) != NULL) {
+//		str[len-1] = '\0';
 		strcpy(ptr, str);
 		lineptr[p] = ptr;
 
@@ -21,13 +23,15 @@ void copyto(char *lineptr[], char *str, int p)
 	/* writelines(lineptr, 5); */
 }
 
-//int main(void) {
-//	char store01[100][100] = {"hello\n", "world\n", "Qian\n"};
+int main(void) {
+	char *store01[] = {"hello", "world", "Qian"};
 //	char *store[100];
-// 	int n;
-//
-// 	for(n = 0; n < 3; n++)
-// 		copyto(store, store01[n], n);
-//
-//	writelines(store, n);
-//}
+ 	int n;
+
+	writelines(store01, 3);
+
+ 	for(n = 0; n < 2; n++)
+ 		copyto(store01, store01[n + 1], n);
+
+	writelines(store01, 3);
+}
