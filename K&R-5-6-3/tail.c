@@ -1,18 +1,34 @@
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
 #include "common.h"
 
-#define DEFAULT_LINES 10 // determine the default lines
+#define NUMBER 3
 
-int main(void) {
-	char *lineptr[100];
-	int lines;
+int main(int argc, char *argv[]) {
+	char c;
+	char s[100] = "";
+ 	int maxlines, n;
 
-	if((lines = readlines(lineptr, MAXLINES)) > 0) {
-		qsort(lineptr, 0, lines - 1);
-		writelines(lineptr, lines);
-		return 0;
-	} else {
-		printf("error: too many lines!\n");
-		return -1;
+	maxlines = NUMBER;
+ 	char *store[maxlines];
+
+	while (--argc > 0 && (*++argv)[0] == '-') {
+		switch (c = *++argv[0]) {
+		case 'n':
+			strcpy(s, *(++argv));
+			--argc;
+			maxlines = atoi(s);
+			break;
+		default:
+			printf("unknown op!\n");
+			break;
+		}
 	}
+
+
+	n = readlines(store, maxlines);
+	writelines(store, n);
+	return 0;
 }
