@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 //void qsort(char *lineptr[], int left, int right);
+=======
+void qsort(char *lineptr[], int left, int right);
+>>>>>>> ae03475 (5-6-3 finshed)
 int readlines(char *lineptr[], int maxline);
 void writelines(char *lineptr[], int num);
 
