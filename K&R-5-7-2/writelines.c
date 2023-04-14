@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void writelines(char *lineptr[], int num)
+void writelines(void *lineptr[], int num)
 {
 	printf(">>>>>>>>>>>>>>>>>>>>>\n");
 	while(num-- > 0)
